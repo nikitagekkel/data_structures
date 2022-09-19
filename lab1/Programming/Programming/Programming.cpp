@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 void BreakpointsFirstTask()
@@ -71,20 +72,19 @@ void ArraysSecondTask()
 {
 	const int arraySize = 12;
 	int count = 0;
-	float array[arraySize] = {94.8F, 98.3F, 3.1F, 2.2F, 67.9F, 62.5F,
-		50.4F, 12.7F, 55.6F, 3.3F, 53.1F, 63.4F};
+	float array[arraySize] = { 94.8F, 98.3F, 3.1F, 2.2F, 67.9F, 62.5F,
+		50.4F, 12.7F, 55.6F, 3.3F, 53.1F, 63.4F };
 	cout << "Source array is:" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
 		cout << array[i] << " ";
 	}
 	cout << endl << "Enter searching value: ";
-	float searchingValue;
+	float searchingValue = 0;
 	cin >> searchingValue;
-	
 	for (int i = 0; i < arraySize; i++)
 	{
-		if (array[i] > searchingValue)
+		if (array[i] > float(searchingValue))
 		{
 			count += 1;
 		}
@@ -98,7 +98,7 @@ void ArraysThirdTask()
 	char array[arraySize]{};
 	string properC;
 	char c;
-	cout << "Enter array of 8 chars" << endl;
+	cout << "Input array of 8 chars" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
 		cout << "a[" << i << "]: ";
@@ -123,6 +123,57 @@ void ArraysThirdTask()
 	cout << "All letter in your array:" << endl << properC << endl;
 }
 
+double GetPower(double base, int exponent)
+{
+	double calculatedNumber = pow(base, exponent);
+	return calculatedNumber;
+}
+
+void FunctionsFirstTask()
+{
+	double number = 0.0;
+	int exponent = 0;
+	int choice = 0;
+	cout << "Input a number to exponent: " << endl;
+	cin >> number;
+	cout << "Input an exponent: " << endl;
+	cin >> exponent;
+	double result = GetPower(number, exponent);
+	cout << "Result: " << number << " ^ " << exponent << " = " << result << endl;
+	cout << "Do you want to do this operation again?" << endl << "1. Yes" << endl << "2. No" << endl;
+	cin >> choice;
+	if (choice == 1)
+	{
+		FunctionsFirstTask();
+	}
+	else
+	{
+		return;
+	}
+}
+
+void RoundToTens(int& value)
+{
+	if (value % 10 < 5)
+	{
+		value = (value / 10) * 10;
+	}
+	else
+	{
+		value = value + (10 - (value % 10));
+	}
+}
+
+void FunctionsSecondTask()
+{
+	int value;
+	cout << "Input a number to round: ";
+	cin >> value;
+	int oldValue = value;
+	RoundToTens(value);
+	cout << "For " << oldValue << " rounded value is " << value << endl;
+}
+
 void PrintMenu()
 {
 	system("cls");
@@ -132,6 +183,8 @@ void PrintMenu()
 	cout << "3. Task 1.1.2.1" << endl;
 	cout << "4. Task 1.1.2.2" << endl;
 	cout << "5. Task 1.1.2.3" << endl;
+	cout << "6. Task 1.1.3.3" << endl;
+	cout << "7. Task 1.1.3.4" << endl;
 }
 
 int GetVariant()
@@ -153,7 +206,7 @@ void ReturnToMenu(void(*menu)())
 	{
 		cout << "You selected the incorrect number, please select it again" << endl;
 		system("Pause");
-		menu();
+		ReturnToMenu((*menu));
 	}
 }
 
@@ -161,7 +214,7 @@ void Menu()
 {
 	PrintMenu();
 	int variant = GetVariant();
-	if (variant >= 1 && variant <= 5)
+	if (variant >= 1 && variant <= 7)
 	{
 		switch (variant)
 		{
@@ -188,6 +241,16 @@ void Menu()
 		case 5:
 		{
 			ArraysThirdTask();
+			ReturnToMenu(Menu);
+		}
+		case 6:
+		{
+			FunctionsFirstTask();
+			ReturnToMenu(Menu);
+		}
+		case 7:
+		{
+			FunctionsSecondTask();
 			ReturnToMenu(Menu);
 		}
 		}
