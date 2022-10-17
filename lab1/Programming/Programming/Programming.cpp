@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 using namespace std;
 
@@ -37,16 +40,16 @@ void BreakpointsSecondTask()
 void ArraysFirstTask()
 {
 	const int arraySize = 10;
-	int arr[arraySize]{};
+	int array[arraySize]{};
 	for (int i = 0; i < arraySize; i++)
 	{
-		arr[i] = rand()%100;
+		array[i] = rand()%100;
 	}
 
 	cout << "Source array is:" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 
@@ -54,9 +57,9 @@ void ArraysFirstTask()
 	{
 		for (int j = i + 1; j < arraySize; j++)
 		{
-			if (arr[i] > arr[j])
+			if (array[i] > array[j])
 			{
-				swap(arr[i], arr[j]);
+				swap(array[i], array[j]);
 			}
 		}
 	}
@@ -64,7 +67,7 @@ void ArraysFirstTask()
 	cout << "Sorted array is:" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 }
@@ -73,12 +76,12 @@ void ArraysSecondTask()
 {
 	const int arraySize = 12;
 	int count = 0;
-	float arr[arraySize] = { 94.8F, 98.3F, 3.1F, 2.2F, 67.9F, 62.5F,
+	float array[arraySize] = { 94.8F, 98.3F, 3.1F, 2.2F, 67.9F, 62.5F,
 		50.4F, 12.7F, 55.6F, 3.3F, 53.1F, 63.4F };
 	cout << "Source array is:" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 
 	cout << endl << "Enter searching value: ";
@@ -86,7 +89,7 @@ void ArraysSecondTask()
 	cin >> searchingValue;
 	for (int i = 0; i < arraySize; i++)
 	{
-		if (arr[i] > float(searchingValue))
+		if (array[i] > float(searchingValue))
 		{
 			count += 1;
 		}
@@ -97,7 +100,7 @@ void ArraysSecondTask()
 void ArraysThirdTask()
 {
 	const int arraySize = 8;
-	char arr[arraySize]{};
+	char array[arraySize]{};
 	string properChars;
 	char c;
 	cout << "Enter array of 8 chars" << endl;
@@ -105,21 +108,21 @@ void ArraysThirdTask()
 	{
 		cout << "a[" << i << "]: ";
 		cin >> c;
-		arr[i] = c;
+		array[i] = c;
 	}
 
 	cout << "Your array is:" << endl;
 	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 
 	for (int i = 0; i < arraySize; i++)
 	{
-		if (isalpha(arr[i]))
+		if (isalpha(array[i]))
 		{
-			properChars = properChars + arr[i] + " ";
+			properChars = properChars + array[i] + " ";
 		}
 	}
 	cout << "All letter in your array:" << endl << properChars << endl;
@@ -217,7 +220,7 @@ void AdressesThirdTask()
 	cout << "Value of a: " << a << endl;
 }
 
-void FirstFoo(double a)
+void FooFirst(double a)
 {
 	cout << "Address of a in Foo(): " << &a << endl;
 	cout << "Value of a in Foo(): " << a << endl;
@@ -231,12 +234,12 @@ void AdressesFourthTask()
 	cout << "Address of a in main(): " << &a << endl;
 	cout << "Value of a in main(): " << a << endl;
 	cout << endl;
-	FirstFoo(a);
+	FooFirst(a);
 	cout << endl;
 	cout << "Value of a in main(): " << a << endl;
 }
 
-void SecondFoo(double& a)
+void FooSecond(double& a)
 {
 	cout << "Address of a in Foo(): " << &a << endl;
 	cout << "Value of a in Foo(): " << a << endl;
@@ -250,7 +253,7 @@ void AdressesFifthTask()
 	cout << "Address of a in main(): " << &a << endl;
 	cout << "Value of a in main(): " << a << endl;
 	cout << endl;
-	SecondFoo(a);
+	FooSecond(a);
 	cout << endl;
 	cout << "Value of a in main(): " << a << endl;
 }
@@ -268,7 +271,7 @@ void AdressesSixthTask()
 	cout << "Value by pointer address: " << *pointer << endl;
 }
 
-void ThirdFoo(double* a)
+void FooThird(double* a)
 {
 	cout << "Address in pointer: " << a << endl;
 	cout << "Address of pointer: " << &a << endl;
@@ -286,7 +289,7 @@ void AdressesSeventhTask()
 	cout << "Address of pointer in main(): " << &pointer << endl;
 	cout << "Value of a in main(): " << value << endl;
 	cout << endl;
-	ThirdFoo(pointer);
+	FooThird(pointer);
 	cout << endl;
 	cout << "Value of a in main(): " << value << endl;
 }
@@ -294,51 +297,51 @@ void AdressesSeventhTask()
 void DynamicMemoryFirstTask()
 {
 	int size = 3;
-	double* arr = new double[size] {1.0,15.0,-8.2};
+	double* array = new double[size] {1.0,15.0,-8.2};
 	cout << "Array of double:" << endl;
 	for (int i = 0; i < size; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
-	delete[] arr;
+	delete[] array;
 }
 
 void DynamicMemorySecondTask()
 {
 	int size = 3;
-	bool* arr = new bool[size] {true, false, true};
+	bool* array = new bool[size] {true, false, true};
 
 	cout << "Array of bool:" << endl;
 	for (int i = 0; i < size; i++)
 	{
-		cout << boolalpha << arr[i] << " ";
+		cout << boolalpha << array[i] << " ";
 	}
 	cout << endl;
-	delete[] arr;
+	delete[] array;
 }
 
 void DynamicMemoryThirdTask()
 {
-	int n = 0;
+	int arraySize = 0;
 	cout << "Enter char array size: ";
-	cin >> n;
-	if (n > 0)
-	{
-		char* arr = new char[n];
-		for (int i = 0; i < n; i++)
+	cin >> arraySize;
+	if (arraySize > 0)
+	{ 
+		char* array = new char[arraySize];
+		for (int i = 0; i < arraySize; i++)
 		{
 			cout << "Enter a[" << i << "]: ";
-			cin >> arr[i];
+			cin >> array[i];
 		}
 		cout << endl;
 		cout << "Your char array is: ";
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < arraySize; i++)
 		{
-			cout << arr[i] << " ";
+			cout << array[i] << " ";
 		}
 		cout << endl;
-		delete[] arr;
+		delete[] array;
 	}
 	else
 	{
@@ -348,125 +351,124 @@ void DynamicMemoryThirdTask()
 
 void DynamicMemoryFourthTask()
 {
-	int size = 10;
-	double* arr = new double[size] {1.0, 15.0, -8.2, -3.5, 12.6, 38.4,
+	int arraySize = 10;
+	double* array = new double[arraySize] {1.0, 15.0, -8.2, -3.5, 12.6, 38.4,
 		-0.5, 4.5, 16.7, 4.5};
 	cout << "Array of double:" << endl;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		for (int j = i + 1; j < size; j++)
+		for (int j = i + 1; j < arraySize; j++)
 		{
-			if (arr[i] > arr[j])
+			if (array[i] > array[j])
 			{
-				swap(arr[i], arr[j]);
+				swap(array[i], array[j]);
 			}
 		}
 	}
 
 	cout << "Sorted array of double:" << endl;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
-	delete[] arr;
+	delete[] array;
 }
 
 void DynamicMemoryFifthTask()
 {
 	int index = -1;
 	int searchingValue;
-	int size = 10;
-	int* arr = new int[size] {1, 15, -8, -3, 12, 38, 0, 4, 16, 4};
+	int arraySize = 10; 
+	int* array = new int[arraySize] {1, 15, -8, -3, 12, 38, 0, 4, 16, 4};
 	cout << "Int array:" << endl;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 
 	cout << endl << "Enter searching value: ";
 	cin >> searchingValue;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
 		index += 1;
-		if (searchingValue == arr[i])
+		if (searchingValue == array[i])
 		{
 			break;
 		}
 	}
 	cout << "Index of searching value " << searchingValue << " is: " << index << endl;
-	delete[] arr;
+	delete[] array;
 }
 
 void DynamicMemorySixthTask()
 {
 	string properChars;
-	int size = 15;
-	char* arr = new char[size] {'a', '1', '4', 'x', 'z', 'v', '0', 'b', 'j', '8', 'g',
+	int arraySize = 15;
+	char* array = new char[arraySize] {'a', '1', '4', 'x', 'z', 'v', '0', 'b', 'j', '8', 'g',
 		'k', '3', 'y', 's'};
 	cout << "Char array is: " << endl;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		cout << arr[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << endl;
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < arraySize; i++)
 	{
-		if (isalpha(arr[i]))
+		if (isalpha(array[i]))
 		{
-			properChars = properChars + arr[i] + " ";
+			properChars = properChars + array[i] + " ";
 		}
 	}
 	cout << "All letter in your array:" << endl << properChars << endl;
-	delete[] arr;
+	delete[] array;
 }
 
 int* MakeRandomArray(int arraySize)
 {
-	int size = arraySize;
-	int* arr = new int[size];
-	for (int i = 0; i < size; i++)
+	int* array = new int[arraySize];
+	for (int i = 0; i < arraySize; i++)
 	{
-		arr[i] = rand() % 100;
+		array[i] = rand() % 100;
 	}
-	return arr;
+	return array;
 }
 
 void DynamicMemorySeventhTask()
 {
-	int* arr1 = MakeRandomArray(5);
+	int* firstArray = MakeRandomArray(5);
 	cout << "Random array of 5: " << endl;
 	for (int i = 0; i < 5; i++)
 	{
-		cout << arr1[i] << " ";
+		cout << firstArray[i] << " ";
 	}
 	cout << endl << endl;
 
-	int* arr2 = MakeRandomArray(8);
+	int* secondArray = MakeRandomArray(8);
 	cout << "Random array of 8: " << endl;
 	for (int i = 0; i < 8; i++)
 	{
-		cout << arr2[i] << " ";
+		cout << secondArray[i] << " ";
 	}
 	cout << endl << endl;
 
 	cout << "Random array of 13: " << endl;
-	int* arr3 = MakeRandomArray(13);
+	int* thirdArray = MakeRandomArray(13);
 	for (int i = 0; i < 13; i++)
 	{
-		cout << arr3[i] << " ";
+		cout << thirdArray[i] << " ";
 	}
 	cout << endl << endl;
 	
-	delete[] arr1, arr2, arr3;
+	delete[] firstArray, secondArray, thirdArray;
 }
 
 int* ReadArray(int count)
@@ -493,19 +495,17 @@ int CountPositiveValues(int* values, int count)
 }
 
 void DynamicMemoryEighthTask()
-{
-	int count;
-
-	count = 15;
-	int* firstValues = ReadArray(count);
-	cout << "Count is: " << CountPositiveValues(firstValues, count) << endl;
-	delete[] firstValues;
+{  
+	int count = 15;
+	int* values = ReadArray(count);
+	cout << "Count is: " << CountPositiveValues(values, count) << endl;
+	delete[] values;
 
 	count = 20;
-	int* secondValues = ReadArray(count);
-	cout << "Count is: " << CountPositiveValues(secondValues, count) << endl;
+	values = ReadArray(count);
+	cout << "Count is: " << CountPositiveValues(values, count) << endl;
 
-	delete[] secondValues;
+	delete[] values;
 }
 
 void PrintMenu()
@@ -534,183 +534,168 @@ void PrintMenu()
 	cout << "20. Task 1.1.5.6" << endl;
 	cout << "21. Task 1.1.5.7" << endl;
 	cout << "22. Task 1.1.5.8" << endl;
+	cout << "23. Exit" << endl;
 	cout << endl;
-}
-
-int GetVariant()
-{
-	int variant = 0;
-	cin >> variant;
-	return variant;
-}
-
-void ReturnToMenu(void(*menu)())
-{
-	cout << "1. Return to menu" << endl;
-	int newVariant = GetVariant();
-	if (newVariant == 1)
-	{
-		menu();
-	}
-	else
-	{
-		cout << "You selected the incorrect number, please select it again" << endl;
-		system("Pause");
-		ReturnToMenu(*menu);
-	}
 }
 
 void Menu()
 {
 	PrintMenu();
-	int variant = GetVariant();
-	if (variant >= 1 && variant <= 22)
+	int variant = 0;
+	cin >> variant;
+	if (variant >= 1 && variant <= 23)
 	{
-		switch (variant)
-		{
-		case 1:
-		{
-			system("cls");
-			BreakpointsFirstTask();
-			ReturnToMenu(Menu);
-		}
-		case 2:
-		{
-			system("cls");
-			BreakpointsSecondTask();
-			ReturnToMenu(Menu);
-		}
-		case 3:
-		{
-			system("cls");
-			ArraysFirstTask();
-			ReturnToMenu(Menu);
-		}
-		case 4:
-		{
-			system("cls");
-			ArraysSecondTask();
-			ReturnToMenu(Menu);
-		}
-		case 5:
-		{
-			system("cls");
-			ArraysThirdTask();
-			ReturnToMenu(Menu);
-		}
-		case 6:
-		{
-			system("cls");
-			FunctionsFirstTask();
-			ReturnToMenu(Menu);
-		}
-		case 7:
-		{
-			system("cls");
-			FunctionsSecondTask();
-			ReturnToMenu(Menu);
-		}
-		case 8:
-		{
-			system("cls");
-			AdressesFirstTask();
-			ReturnToMenu(Menu);
-		}
-		case 9:
-		{
-			system("cls");
-			AdressesSecondTask();
-			ReturnToMenu(Menu);
-		}
-		case 10:
-		{
-			system("cls");
-			AdressesThirdTask();
-			ReturnToMenu(Menu);
-		}
-		case 11:
-		{
-			system("cls");
-			AdressesFourthTask();
-			ReturnToMenu(Menu);
-		}
-		case 12:
-		{
-			system("cls");
-			AdressesFifthTask();
-			ReturnToMenu(Menu);
-		}
-		case 13:
-		{
-			system("cls");
-			AdressesSixthTask();
-			ReturnToMenu(Menu);
-		}
-		case 14:
-		{
-			system("cls");
-			AdressesSeventhTask();
-			ReturnToMenu(Menu);
-		}
-		case 15:
-		{
-			system("cls");
-			DynamicMemoryFirstTask();
-			ReturnToMenu(Menu);
-		}
-		case 16:
-		{
-			system("cls");
-			DynamicMemorySecondTask();
-			ReturnToMenu(Menu);
-		}
-		case 17:
-		{
-			system("cls");
-			DynamicMemoryThirdTask();
-			ReturnToMenu(Menu);
-		}
-		case 18:
-		{
-			system("cls");
-			DynamicMemoryFourthTask();
-			ReturnToMenu(Menu);
-		}
-		case 19:
-		{
-			system("cls");
-			DynamicMemoryFifthTask();
-			ReturnToMenu(Menu);
-		}
-		case 20:
-		{
-			system("cls");
-			DynamicMemorySixthTask();
-			ReturnToMenu(Menu);
-		}
-		case 21:
-		{
-			system("cls");
-			DynamicMemorySeventhTask();
-			ReturnToMenu(Menu);
-		}
-		case 22:
-		{
-			system("cls");
-			DynamicMemoryEighthTask();
-			ReturnToMenu(Menu);
-		}
+		switch (variant) {
+			case 1:
+			{
+				system("cls");
+				BreakpointsFirstTask();
+				break;
+			}
+			case 2:
+			{
+				system("cls");
+				BreakpointsSecondTask();
+				break;
+			}
+			case 3:
+			{
+				system("cls");
+				ArraysFirstTask();
+				break;
+			}
+			case 4:
+			{
+				system("cls");
+				ArraysSecondTask();
+				break;
+			}
+			case 5:
+			{
+				system("cls");
+				ArraysThirdTask();
+				break;
+			}
+			case 6:
+			{
+				system("cls");
+				FunctionsFirstTask();
+				break;
+			}
+			case 7:
+			{
+				system("cls");
+				FunctionsSecondTask();
+				break;
+			}
+			case 8:
+			{
+				system("cls");
+				AdressesFirstTask();
+				break;
+			}
+			case 9:
+			{
+				system("cls");
+				AdressesSecondTask();
+				break;
+			}
+			case 10:
+			{
+				system("cls");
+				AdressesThirdTask();
+				break;
+			}
+			case 11:
+			{
+				system("cls");
+				AdressesFourthTask();
+				break;
+			}
+			case 12:
+			{
+				system("cls");
+				AdressesFifthTask();
+				break;
+			}
+			case 13:
+			{
+				system("cls");
+				AdressesSixthTask();
+				break;
+			}
+			case 14:
+			{
+				system("cls");
+				AdressesSeventhTask();
+				break;
+			}
+			case 15:
+			{
+				system("cls");
+				DynamicMemoryFirstTask();
+				break;
+			}
+			case 16:
+			{
+				system("cls");
+				DynamicMemorySecondTask();
+				break;
+			}
+			case 17:
+			{
+				system("cls");
+				DynamicMemoryThirdTask();
+				break;
+			}
+			case 18:
+			{
+				system("cls");
+				DynamicMemoryFourthTask();
+				break;
+			}
+			case 19:
+			{
+				system("cls");
+				DynamicMemoryFifthTask();
+				break;
+			}
+			case 20:
+			{
+				system("cls");
+				DynamicMemorySixthTask();
+				break;
+			}
+			case 21:
+			{
+				system("cls");
+				DynamicMemorySeventhTask();
+				break;
+			}
+			case 22:
+			{
+				system("cls");
+				DynamicMemoryEighthTask();
+				break;
+			}
+			case 23:
+			{
+				return;
+			}
 		}
 	}
 	else
 	{
 		cout << "You selected the incorrect number, please select it again" << endl;
-		system("Pause");
-		Menu();
 	}
+
+	system("Pause");
+	Menu();
 }
 
 int main()
 {
 	Menu();
+	_CrtDumpMemoryLeaks();
+	return 0;
 }
