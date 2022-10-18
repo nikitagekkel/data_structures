@@ -11,12 +11,9 @@ void AddElementInArray(DynamicArray* array)
 	cout << "\nEnter the value of the element that you want to add to the array: ";
 	cin >> element;
 
-	if (array->size >= array->capacity)
-	{
-		ResizeDynamicArray(array);
-	}
-	array->size++;
-	array->array[array->size - 1] = element;
+	ResizeDynamicArray(array);
+	array->length++;
+	array->array[array->length - 1] = element;
 
 	PrintArray(array);
 }
@@ -30,12 +27,12 @@ void RemoveElementAtIndex(DynamicArray* array)
 
 	if (CheckIndexOutRange(array, index)) return;
 
-	for (int i = index; i < array->size - 1; i++)
+	for (int i = index; i < array->length - 1; i++)
 	{
 		array->array[i] = array->array[i + 1];
 	}
 
-	array->size--;
+	array->length--;
 
 	PrintArray(array);
 }
@@ -48,46 +45,30 @@ void InsertElementToFirstPosition(DynamicArray* array)
 	cout << "that you want to add to the first position of the array: ";
 	cin >> element;
 
-	if (array->size >= array->capacity)
-	{
-		ResizeDynamicArray(array);
-	}
-	array->size++;
+	ResizeDynamicArray(array);
+	array->length++;
 
-	int* tempArray = new int[array->capacity];
+	int* tempArray = new int[array->capacity + 4];
 	tempArray[0] = element;
-	for (int i = 1; i < array->size; i++)
+	for (int i = 1; i < array->length; i++)
 	{
 		tempArray[i] = array->array[i - 1];
 	}
 	delete[] array->array;
 	array->array = tempArray;
-
 	PrintArray(array);
 }
 
 void InsertElementToLastPosition(DynamicArray* array)
 {
-	int element;
+	int element = 0;
 
-	cout << "\nEnter the value of the element ";
-	cout << "that you want to add to the last position of the array: ";
+	cout << "\nEnter the value of the element that you want to add to the array: ";
 	cin >> element;
 
-	if (array->size >= array->capacity)
-	{
-		ResizeDynamicArray(array);
-	}
-	array->size++;
-
-	int* tempArray = new int[array->capacity];
-	for (int i = 0; i < array->size; i++)
-	{
-		tempArray[i] = array->array[i];
-	}
-	tempArray[array->size-1] = element;
-	delete[] array->array;
-	array->array = tempArray;
+	ResizeDynamicArray(array);
+	array->length++;
+	array->array[array->length - 1] = element;
 
 	PrintArray(array);
 }
@@ -106,13 +87,10 @@ void InsertElementAtIndex(DynamicArray* array)
 	cout << "\nEnter the value of the element that you want to add to the array: ";
 	cin >> element;
 
-	if (array->size >= array->capacity)
-	{
-		ResizeDynamicArray(array);
-	}
-	array->size++;
+	ResizeDynamicArray(array);
+	array->length++;
 	
-	int* tempArray = new int[array->capacity];
+	int* tempArray = new int[array->capacity + 16];
 	for (int i = 0; i <= index; i++)
 	{
 		tempArray[i] = array->array[i];
@@ -121,7 +99,7 @@ void InsertElementAtIndex(DynamicArray* array)
 	tempArray[index + 1] = element;
 	tempArray[index + 2] = tempElement;
 
-	for (int i = index + 2; i < array->size; i++)
+	for (int i = index + 2; i < array->length; i++)
 	{
 		tempArray[i + 1] = array->array[i];
 	}
@@ -133,9 +111,9 @@ void InsertElementAtIndex(DynamicArray* array)
 
 void ArraySort(DynamicArray* array)
 {
-	for (int i = 0; i < array->size - 1; i++)
+	for (int i = 0; i < array->length - 1; i++)
 	{
-		for (int j = i + 1; j < array->size; j++)
+		for (int j = i + 1; j < array->length; j++)
 		{
 			if (array->array[j] < array->array[i])
 			{
@@ -151,11 +129,11 @@ void LinearSearch(DynamicArray* array, int count)
 	int element;
 	cout << "Enter the element, whose index needs to be found: ";
 	cin >> element;
-	for (int i = 0; i < array->size; i++)
+	for (int i = 0; i < array->length; i++)
 	{
 		if (element == array->array[i])
 		{
-			cout << "Index of the element is: " << i << endl;
+			cout << "Index of " << element << " is: " << i << endl;
 			count += 1;
 		}
 	}
@@ -172,7 +150,7 @@ void BinarySearch(DynamicArray* array)
 	int element;
 	int middle;
 	int left = 0;
-	int right = array->size;
+	int right = array->length;
 	cout << "Enter the element, whose index needs to be found: ";
 	cin >> element;
 	while (right - left > 1)
@@ -193,12 +171,16 @@ void BinarySearch(DynamicArray* array)
 	}
 	else
 	{
-		cout << "Index of element is: " << right << endl;
+		cout << "Index of " << element << " is: " << right << endl;
 	}
 }
 
 void ReInitializeDynamicArray(DynamicArray* array)
 {
-	InitializeDynamicArray(array);
+	int capacity = 8;
+	array->capacity = capacity;
+	array->length = 0;
+	delete[] array->array;
+	array->array = new int[array->length + capacity];
 	cout << "The array has been successfully reinitialized" << endl;
 }

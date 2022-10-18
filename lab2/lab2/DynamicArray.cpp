@@ -3,13 +3,13 @@
 
 using namespace std;
 
+int capacity = 8;
+
 void InitializeDynamicArray(DynamicArray* array)
 {
-	int capacity = 8;
-
 	array->capacity = capacity;
-	array->size = 0;
-	array->array = new int[array->size + capacity];
+	array->length = 0;
+	array->array = new int[array->length + capacity];
 }
 
 void PrintArray(DynamicArray* array)
@@ -17,7 +17,7 @@ void PrintArray(DynamicArray* array)
 	cout << "\n";
 	cout << "Array: ";
 
-	for (int i = 0; i < array->size; i++)
+	for (int i = 0; i < array->length; i++)
 	{
 		cout << "[" << i << "]" << array->array[i] << " ";
 	}
@@ -27,7 +27,7 @@ void PrintArray(DynamicArray* array)
 
 bool CheckIndexOutRange(DynamicArray* array, int index)
 {
-	if (index < 0 || index > array->size - 1)
+	if (index < 0 || index > array->length - 1)
 	{
 		cout << "The index is a negative number, or it goes beyond the borders of the array"
 			<< endl;
@@ -41,16 +41,18 @@ bool CheckIndexOutRange(DynamicArray* array, int index)
 
 void ResizeDynamicArray(DynamicArray* array)
 {
-	int capacity = 8;
-	array->capacity += capacity;
-
-	int* tempArray = new int[array->capacity];
-
-	for (int i = 0; i < array->size; i++)
+	if (array->length >= array->capacity)
 	{
-		tempArray[i] = array->array[i];
-	}
+		array->capacity += capacity;
 
-	delete[] array->array;
-	array->array = tempArray;
+		int* tempArray = new int[array->capacity + 4];
+
+		for (int i = 0; i < array->length; i++)
+		{
+			tempArray[i] = array->array[i];
+		}
+
+		delete[] array->array;
+		array->array = tempArray;
+	}
 }
