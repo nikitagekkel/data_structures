@@ -1,5 +1,6 @@
 #include "DynamicArray.h"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -111,12 +112,93 @@ void InsertElementAtIndex(DynamicArray* array)
 	}
 	array->size++;
 	
-	tempElement = array->array[index + 1];
-	array->array[index + 1] = element;
-	for (int i = index + 2; i < array->size + 1; i++)
+	int* tempArray = new int[array->capacity];
+	for (int i = 0; i <= index; i++)
 	{
-		array->array[i - 1] = array->array[i];
+		tempArray[i] = array->array[i];
 	}
+	tempElement = array->array[index + 1];
+	tempArray[index + 1] = element;
+	tempArray[index + 2] = tempElement;
+
+	for (int i = index + 2; i < array->size; i++)
+	{
+		tempArray[i + 1] = array->array[i];
+	}
+	delete[] array->array;
+	array->array = tempArray;
 
 	PrintArray(array);
+}
+
+void ArraySort(DynamicArray* array)
+{
+	for (int i = 0; i < array->size - 1; i++)
+	{
+		for (int j = i + 1; j < array->size; j++)
+		{
+			if (array->array[j] < array->array[i])
+			{
+				swap(array->array[j], array->array[i]);
+			}
+		}
+	}
+}
+
+void LinearSearch(DynamicArray* array, int count)
+{
+	PrintArray(array);
+	int element;
+	cout << "Enter the element, whose index needs to be found: ";
+	cin >> element;
+	for (int i = 0; i < array->size; i++)
+	{
+		if (element == array->array[i])
+		{
+			cout << "Index of the element is: " << i << endl;
+			count += 1;
+		}
+	}
+	if (count == 0)
+	{
+		cout << "Element not found\n";
+	}
+}
+
+void BinarySearch(DynamicArray* array)
+{
+	ArraySort(array);
+	PrintArray(array);
+	int element;
+	int middle;
+	int left = 0;
+	int right = array->size;
+	cout << "Enter the element, whose index needs to be found: ";
+	cin >> element;
+	while (right - left > 1)
+	{
+		middle = (left + right) / 2;
+		if (array->array[middle] < element)
+		{
+			left = middle;
+		}
+		else
+		{
+			right = middle;
+		}
+	}
+	if (array->array[right] != element)
+	{
+		cout << "Element not found" << endl;
+	}
+	else
+	{
+		cout << "Index of element is: " << right << endl;
+	}
+}
+
+void ReInitializeDynamicArray(DynamicArray* array)
+{
+	InitializeDynamicArray(array);
+	cout << "The array has been successfully reinitialized" << endl;
 }

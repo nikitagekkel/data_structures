@@ -7,7 +7,7 @@ struct DynamicArray
 	int capacity;
 };
 
-void InitDynamicArray(DynamicArray* array);
+void InitializeDynamicArray(DynamicArray* array);
 void PrintArray(DynamicArray* array);
 bool CheckIndexOutRange(DynamicArray* array, int index);
 void ResizeDynamicArray(DynamicArray* array);

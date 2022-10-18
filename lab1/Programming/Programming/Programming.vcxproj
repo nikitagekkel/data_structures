@@ -139,7 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayActions.cpp" />
     <ClCompile Include="Programming.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrayActions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

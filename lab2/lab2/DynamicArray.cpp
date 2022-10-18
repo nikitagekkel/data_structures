@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void InitDynamicArray(DynamicArray* array)
+void InitializeDynamicArray(DynamicArray* array)
 {
 	int capacity = 8;
 
