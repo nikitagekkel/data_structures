@@ -1,0 +1,32 @@
+#pragma once
+
+void BreakpointsFirstTask();
+void BreakpointsSecondTask();
+void ArraysFirstTask();
+void ArraysSecondTask();
+void ArraysThirdTask();
+double GetPower(double base, int exponent);
+void FunctionsFirstTask();
+void RoundToTens(int& value);
+void FunctionsSecondTask();
+void AdressesFirstTask();
+void AdressesSecondTask();
+void AdressesThirdTask();
+void FooFirst(double a);
+void AdressesFourthTask();
+void FooSecond(double& a);
+void AdressesFifthTask();
+void AdressesSixthTask();
+void FooThird(double* a);
+void AdressesSeventhTask();
+void DynamicMemoryFirstTask();
+void DynamicMemorySecondTask();
+void DynamicMemoryThirdTask();
+void DynamicMemoryFourthTask();
+void DynamicMemoryFifthTask();
+void DynamicMemorySixthTask();
+int* MakeRandomArray(int arraySize);
+void DynamicMemorySeventhTask();
+int* ReadArray(int count);
+int CountPositiveValues(int* values, int count);
+void DynamicMemoryEighthTask();
