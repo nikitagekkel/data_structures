@@ -1,6 +1,4 @@
 #pragma once
-#include <vector>
-using namespace std;
 
 //TODO: xml -> doxygen
 /// <summary>
@@ -9,15 +7,12 @@ using namespace std;
 struct DynamicArray
 {
 	//TODO: rsdn 
-	vector<int> Array;
-	int Length;
-	int Capacity;
-	const int capacity = 8;
+	int Length = 0;
+	const int ConstCapacity = 8;
+	int Capacity = ConstCapacity;
+	int* Array = new int[Length + Capacity];
 };
 
-void InitializeDynamicArray(DynamicArray* array);
-void PrintArray(DynamicArray* array);
-void PrintIndexOutOfRange();
 bool CheckIndexOutRange(DynamicArray* array, int index);
-void ResizeDynamicArray(DynamicArray* array);
-void PrintIndexOfElement(int index, int element);
+void IncreaseDynamicArray(DynamicArray* array);
+void DecreaseDynamicArray(DynamicArray* array);

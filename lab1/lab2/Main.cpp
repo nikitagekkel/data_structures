@@ -15,12 +15,48 @@ void PrintMenu()
 	cout << "2. Add element to the array" << endl;
 	cout << "3. Remove element from the array" << endl;
 	cout << "4. Add element to the first position in the array" << endl;
-	cout << "5. Add element to the last position in the array" << endl;
-	cout << "6. Add element after the existing element" << endl;
-	cout << "7. Sort array" << endl;
-	cout << "8. Linear search for an element in the array" << endl;
-	cout << "9. Binary search for an element in the array" << endl;
-	cout << "10. Reinitialize array" << endl;
+	cout << "5. Add element after the existing element" << endl;
+	cout << "6. Sort array" << endl;
+	cout << "7. Linear search for an element in the array" << endl;
+	cout << "8. Binary search for an element in the array" << endl;
+	cout << "9. Reinitialize array" << endl;
+}
+
+/// <summary>
+/// Реализует вывод динамического массива в консоль
+/// </summary>
+/// <param name="array">Динамический массив</param>
+void PrintArray(DynamicArray* array)
+{
+	cout << "\nArray: ";
+
+	for (int i = 0; i < array->Length; i++)
+	{
+		cout << "[" << i << "]" << array->Array[i] << " ";
+	}
+	cout << endl;
+}
+
+/// <summary>
+/// Реализует вывод ошибки о превышении индекса в консоль
+/// </summary>
+void PrintIndexOutOfRange()
+{
+	cout << "\nThe index is a negative number,";
+	cout << " or it goes beyond the borders of the array" << endl;
+	cout << "\n";
+}
+
+void PrintIndexOfElement(int index, int element)
+{
+	if (index >= 0)
+	{
+		cout << "\nIndex of " << element << " is: " << index << endl;
+	}
+	else
+	{
+		cout << "\nElement not found" << endl;
+	}
 }
 
 /// <summary>
@@ -31,7 +67,6 @@ int main()
 {
 	int variant;
 	DynamicArray* array = new DynamicArray;
-	InitializeDynamicArray(array);
 
 	while (true)
 	{
@@ -67,7 +102,13 @@ int main()
 			PrintArray(array);
 			cout << "\nEnter the index of the element to remove: ";
 			cin >> index;
+			if (CheckIndexOutRange(array, index))
+			{
+				PrintIndexOutOfRange();
+				break;
+			}
 			RemoveElementAtIndex(array, index);
+			PrintArray(array);
 			break;
 		}
 		case 4:
@@ -83,16 +124,6 @@ int main()
 		}
 		case 5:
 		{
-			int element = 0;
-
-			cout << "\nEnter the value of the element that you want to add to the array: ";
-			cin >> element;
-			InsertElementToLastPosition(array, element);
-			PrintArray(array);
-			break;
-		}
-		case 6:
-		{
 			int index;
 			int element;
 
@@ -100,19 +131,24 @@ int main()
 			cout << "\nEnter the index of the element ";
 			cout << "after which the new element should be placed: ";
 			cin >> index;
+			if (CheckIndexOutRange(array, index))
+			{
+				PrintIndexOutOfRange();
+				break;
+			}
 			cout << "\nEnter the value of the element that you want to add to the array: ";
 			cin >> element;
 			InsertElementAtIndex(array, index, element);
 			PrintArray(array);
 			break;
 		}
-		case 7:
+		case 6:
 		{
 			ArraySort(array);
 			PrintArray(array);
 			break;
 		}
-		case 8:
+		case 7:
 		{
 			int element;
 			int result;
@@ -125,7 +161,7 @@ int main()
 
 			break;
 		}
-		case 9:
+		case 8:
 		{
 			int element;
 			int result;
@@ -139,7 +175,7 @@ int main()
 
 			break;
 		}
-		case 10:
+		case 9:
 		{
 			ReInitializeDynamicArray(array);
 			cout << "\nThe array has been successfully reinitialized" << endl;
@@ -150,6 +186,7 @@ int main()
 			cout << "\nYou entered the incorrect number" << endl;
 		}
 		}
+		cout << "\n";
 		system("pause");
 	}
 	delete[] array->Array;

@@ -11,7 +11,7 @@ using namespace std;
 /// <param name="element">Добавляемый элемент</param>
 void AddElementInArray(DynamicArray* array, int element)
 {
-	ResizeDynamicArray(array);
+	IncreaseDynamicArray(array);
 	array->Length++;
 	array->Array[array->Length - 1] = element;
 }
@@ -23,18 +23,13 @@ void AddElementInArray(DynamicArray* array, int element)
 /// <param name="index">Индекс удаляемого элемента</param>
 void RemoveElementAtIndex(DynamicArray* array, int index)
 {
-	if (CheckIndexOutRange(array, index))
-	{
-		PrintIndexOutOfRange();
-		return;
-	}
-
 	for (int i = index; i < array->Length - 1; i++)
 	{
 		array->Array[i] = array->Array[i + 1];
 	}
 
 	array->Length--;
+	DecreaseDynamicArray(array);
 }
 
 /// <summary>
@@ -44,10 +39,10 @@ void RemoveElementAtIndex(DynamicArray* array, int index)
 /// <param name="element">Добавляемый элемент</param>
 void InsertElementToFirstPosition(DynamicArray* array, int element)
 {
-	ResizeDynamicArray(array);
+	IncreaseDynamicArray(array);
 	array->Length++;
 
-	int* tempArray = new int[array->Capacity + 4];
+	int* tempArray = new int[array->Length];
 	tempArray[0] = element;
 	for (int i = 1; i < array->Length; i++)
 	{
@@ -58,51 +53,33 @@ void InsertElementToFirstPosition(DynamicArray* array, int element)
 }
 
 /// <summary>
-/// Реализует добавление элемента на последнюю позицию массива
-/// </summary>
-/// <param name="array">Динамический массив</param>
-/// <param name="element">Добавлемый элемент</param>
-void InsertElementToLastPosition(DynamicArray* array, int element)
-{
-	ResizeDynamicArray(array);
-	array->Length++;
-	array->Array[array->Length - 1] = element;
-}
-
-/// <summary>
 /// Реализует добавление элемента по индексу
 /// </summary>
 /// <param name="array">Динамический массив</param>
 /// <param name="index">Индекс добавляемого элемента</param>
 /// <param name="element">Добавляемый элемент</param>
+#pragma warning(push)
+#pragma warning(disable:6386)
 void InsertElementAtIndex(DynamicArray* array, int index, int element)
 {
-	if (CheckIndexOutRange(array, index))
-	{
-		PrintIndexOutOfRange();
-		return;
-	}
-	ResizeDynamicArray(array);
+	IncreaseDynamicArray(array);
 	array->Length++;
-	
-	int* tempArray = new int[array->Capacity + 16];
-	for (int i = 0; i <= index; i++)
+
+	index += 1;
+	int* tempArray = new int[array->Length];
+	tempArray[index] = element;
+	for (int i = 0; i < index; i++)
 	{
 		tempArray[i] = array->Array[i];
 	}
-	int tempElement;
-	tempElement = array->Array[index + 1];
-	tempArray[index + 1] = element;
-	tempArray[index + 2] = tempElement;
-
-	for (int i = index + 2; i < array->Length; i++)
+	for (int i = index; i < array->Length - 1; i++)
 	{
 		tempArray[i + 1] = array->Array[i];
 	}
-
 	delete[] array->Array;
 	array->Array = tempArray;
 }
+#pragma warning(pop)
 
 /// <summary>
 /// Реализует сортировку динамического массива
@@ -188,9 +165,8 @@ int BinarySearch(DynamicArray* array, int element)
 /// <param name="array"></param>
 void ReInitializeDynamicArray(DynamicArray* array)
 {
-	int capacity = 8;
-	array->Capacity = capacity;
+	array->Capacity = array->ConstCapacity;
 	array->Length = 0;
 	delete[] array->Array;
-	array->Array = new int[array->Length + capacity];
+	array->Array = new int[array->Length + array->ConstCapacity];
 }
