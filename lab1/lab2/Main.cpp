@@ -4,6 +4,9 @@
 
 using namespace std;
 
+/// <summary>
+/// Выводит в консоль список команд для выполнения
+/// </summary>
 void PrintMenu()
 {
 	system("cls");
@@ -20,6 +23,10 @@ void PrintMenu()
 	cout << "10. Reinitialize array" << endl;
 }
 
+/// <summary>
+/// Реализует обработку консольных команд
+/// </summary>
+/// <returns>Вовзращает выход из функции</returns>
 int main()
 {
 	int variant;
@@ -113,14 +120,8 @@ int main()
 			cout << "\nEnter the element, whose index needs to be found: ";
 			cin >> element;
 			result = LinearSearch(array, element);
-			if (result >= 0)
-			{
-				cout << "\nIndex of " << element << " is: " << result << endl;
-			}
-			else
-			{
-				cout << "\nElement not found" << endl;
-			}
+			//TODO:дубль
+			PrintIndexOfElement(result, element);
 
 			break;
 		}
@@ -133,14 +134,8 @@ int main()
 			cout << "\nEnter the element, whose index needs to be found: ";
 			cin >> element;
 			result = BinarySearch(array, element);
-			if (result >= 0)
-			{
-				cout << "\nIndex of " << element << " is: " << result << endl;
-			}
-			else
-			{
-				cout << "\nElement not found" << endl;
-			}
+			//TODO:дубль
+			PrintIndexOfElement(result, element);
 
 			break;
 		}
@@ -157,6 +152,6 @@ int main()
 		}
 		system("pause");
 	}
-	delete[] array->array;
+	delete[] array->Array;
 	delete array;
 }
