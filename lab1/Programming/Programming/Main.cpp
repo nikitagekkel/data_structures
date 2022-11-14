@@ -1,10 +1,18 @@
+/**
+\file
+\brief Класс Main
+Данный класс содержит в себе меню, со способами вызова
+методов работы с динамическим массивом
+*/
 #include <iostream>
 #include "DynamicArray.h"
 #include "ArrayActions.h"
-#include <string>
 
 using namespace std;
 
+/**
+Функция, выводящая в консоль пункты меню
+*/
 void PrintMenu()
 {
 	system("cls");
@@ -20,6 +28,10 @@ void PrintMenu()
 	cout << "9. Reinitialize array" << endl;
 }
 
+/**
+Функция, выводящая в консоль динамический массив
+\param array Динамический массив
+*/
 void PrintArray(DynamicArray* array)
 {
 	cout << "Array: ";
@@ -31,12 +43,20 @@ void PrintArray(DynamicArray* array)
 	cout << endl;
 }
 
+/**
+Функция, выводящая ошибку выхода за границу массива
+*/
 void PrintIndexOutOfRange()
 {
 	cout << "\nThe index is a negative number,";
 	cout << " or it goes beyond the borders of the array" << endl;
 }
 
+/**
+Функция, выводящая индекс элемента в массиве
+\param index Индекс элемента
+\param element Элемент
+*/
 void PrintIndexOfElement(int index, int element)
 {
 	if (index >= 0)
@@ -49,6 +69,10 @@ void PrintIndexOfElement(int index, int element)
 	}
 }
 
+/**
+Функция, проверяющая корректность ввода значений в консоль
+\return Вводимый элемент
+*/
 int TryInput()
 {
 	int element;
@@ -63,7 +87,9 @@ int TryInput()
 	}
 	return element;
 }
-
+/**
+Функция, вызывающая все методы работы с массивом
+*/
 int main()
 {
 	int variant;

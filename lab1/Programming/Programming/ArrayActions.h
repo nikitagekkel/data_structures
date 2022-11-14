@@ -1,3 +1,7 @@
+/**
+\file
+\brief Заголовочный файл класса ArrayActions
+*/
 #pragma once
 #include "DynamicArray.h"
 

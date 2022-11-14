@@ -1,6 +1,9 @@
+/**
+\file
+\brief Заголовочный файл класса DynamicArray
+*/
 #pragma once
 
-//TODO: xml -> doxygen
 struct DynamicArray
 {
 	//TODO: rsdn 

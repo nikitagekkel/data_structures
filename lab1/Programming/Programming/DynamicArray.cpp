@@ -1,4 +1,10 @@
-﻿#include "ArrayActions.h"
+﻿/**
+\file
+\brief Класс DynamicArray
+Данный файл содержит в себе некоторые действия,
+связанные с изменением его размера
+*/
+#include "ArrayActions.h"
 #include <iostream>
 
 using namespace std;
@@ -6,11 +12,23 @@ using namespace std;
 //TODO: внести в структуру
 //int capacity = 8;
 
+/**
+Проверяет, выходит ли принимаемый индекс
+за границы динамического массива
+\param array Динамический массив
+\param index Принимаемый индекс
+\return Булевое значение да или нет
+*/
 bool CheckIndexOutRange(DynamicArray* array, int index)
 {
 	return index < 0 || index > array->Length - 1;
 }
 
+/**
+Увеличивает размер динамического массива, при приближении
+его размера к буферу
+\param array Динамический массив
+*/
 void IncreaseDynamicArray(DynamicArray* array)
 {
 	if (array->Length >= array->Capacity)
@@ -33,6 +51,11 @@ void IncreaseDynamicArray(DynamicArray* array)
 	}
 }
 
+/**
+Уменьшает размер динамического массива, при приближении
+его размера к буферу
+\param array Динамический массив
+*/
 void DecreaseDynamicArray(DynamicArray* array)
 {
 	if (array->Capacity - array->Length
