@@ -73,7 +73,7 @@ int BinarySearch(DynamicArray* array, int element)
 {
 	ArraySort(array);
 
-	int middle;
+	int middle = 0;
 	int left = 0;
 	int right = array->Length;
 	while (right - left > 1)

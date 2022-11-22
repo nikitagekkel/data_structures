@@ -92,7 +92,7 @@ int main()
 	{
 		PrintMenu();
 		cout << "\nEnter nubmer of action: ";
-		int variant;
+		int variant = 0;
 		variant = TryInput();
 		system("cls");
 		switch (variant)
@@ -113,7 +113,7 @@ int main()
 			{
 				//TODO: RSDN
 				cout << "Enter the value of the element that you want to add to the array: ";
-				int element;
+				int element = 0;
 				element = TryInput();
 				AddElementToArray(array, element);
 				cout << "\n";
@@ -125,7 +125,7 @@ int main()
 				//TODO: RSDN
 				PrintArray(array);
 				cout << "Enter the index of the element to remove: ";
-				int index;
+				int index = 0;
 				index = TryInput();
 				if (CheckIndexOutRange(array, index))
 				{
@@ -142,7 +142,7 @@ int main()
 				cout << "Enter the value of the element ";
 				cout << "that you want to add to the ";
 				cout << "first position of the array: ";
-				int element;
+				int element = 0;
 				element = TryInput();
 				InsertElement(array, element, 0);
 				cout << "\n";
@@ -155,7 +155,7 @@ int main()
 				PrintArray(array);
 				cout << "\nEnter the index of the element ";
 				cout << "after which the new element should be placed: ";
-				int index;
+				int index = 0;
 				index = TryInput();
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -166,7 +166,7 @@ int main()
 				}
 				cout << "\nEnter the value of the element";
 				cout << " that you want to add to the array: ";
-				int element;
+				int element = 0;
 				element = TryInput();
 				InsertElement(array, element, index);
 				cout << "\n";
@@ -185,9 +185,9 @@ int main()
 				PrintArray(array);
 				cout << "\nEnter the element,";
 				cout << " whose index needs to be found : ";
-				int element;
+				int element = 0;
 				element = TryInput();
-				int result;
+				int result = 0;
 				result = LinearSearch(array, element);
 				PrintIndexOfElement(result, element);
 				break;
@@ -197,7 +197,7 @@ int main()
 				PrintArray(array);
 				cout << "\nEnter the element,";
 				cout <<	" whose index needs to be found : ";
-				int element;
+				int element = 0;
 				element = TryInput();
 				int result = BinarySearch(array, element);
 				PrintIndexOfElement(result, element);
