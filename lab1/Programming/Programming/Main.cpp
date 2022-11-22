@@ -1,9 +1,3 @@
-/**
-\file
-\brief  ласс Main
-ƒанный класс содержит в себе меню, со способами вызова
-методов работы с динамическим массивом
-*/
 #include <iostream>
 #include "DynamicArray.h"
 #include "ArrayActions.h"
@@ -92,131 +86,135 @@ int TryInput()
 */
 int main()
 {
-	int variant;
+	//TODO: внести
 	DynamicArray* array = new DynamicArray;
 	while (true)
 	{
 		PrintMenu();
 		cout << "\nEnter nubmer of action: ";
+		int variant;
 		variant = TryInput();
 		system("cls");
 		switch (variant)
 		{
-		case 0:
-		{
-			cout << "Program finished" << "\n";
-			return -1;
-			break;
-		}
-		case 1:
-		{
-			PrintArray(array);
-			break;
-		}
-		case 2:
-		{
-			int element;
-
-			cout << "Enter the value of the element that you want to add to the array: ";
-			element = TryInput();
-			AddElementInArray(array, element);
-			cout << "\n";
-			PrintArray(array);
-			break;
-		}
-		case 3:
-		{
-			int index;
-
-			PrintArray(array);
-			cout << "Enter the index of the element to remove: ";
-			index = TryInput();
-			if (CheckIndexOutRange(array, index))
+			//TODO: RSDN
+			case 0:
 			{
-				PrintIndexOutOfRange();
+				cout << "Program finished" << "\n";
+				return -1;
 				break;
 			}
-			RemoveElementAtIndex(array, index);
-			PrintArray(array);
-			break;
-		}
-		case 4:
-		{
-			int element;
-
-			cout << "Enter the value of the element ";
-			cout << "that you want to add to the first position of the array: ";
-			element = TryInput();
-			InsertElementToFirstPosition(array, element);
-			cout << "\n";
-			PrintArray(array);
-			break;
-		}
-		case 5:
-		{
-			int index;
-			int element;
-
-			PrintArray(array);
-			cout << "\nEnter the index of the element ";
-			cout << "after which the new element should be placed: ";
-			index = TryInput();
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			if (CheckIndexOutRange(array, index))
+			case 1:
 			{
-				PrintIndexOutOfRange();
+				PrintArray(array);
 				break;
 			}
-			cout << "\nEnter the value of the element that you want to add to the array: ";
-			element = TryInput();
-			InsertElementAtIndex(array, index, element);
-			cout << "\n";
-			PrintArray(array);
-			break;
-		}
-		case 6:
-		{
-			ArraySort(array);
-			PrintArray(array);
-			break;
-		}
-		case 7:
-		{
-			int element;
-			int result;
-			PrintArray(array);
-			cout << "\nEnter the element, whose index needs to be found: ";
-			element = TryInput();
-			result = LinearSearch(array, element);
-			//TODO:дубль
-			PrintIndexOfElement(result, element);
+			case 2:
+			{
+				//TODO: RSDN
+				cout << "Enter the value of the element that you want to add to the array: ";
+				int element;
+				element = TryInput();
+				AddElementToArray(array, element);
+				cout << "\n";
+				PrintArray(array);
+				break;
+			}
+			case 3:
+			{
+				//TODO: RSDN
+				PrintArray(array);
+				cout << "Enter the index of the element to remove: ";
+				int index;
+				index = TryInput();
+				if (CheckIndexOutRange(array, index))
+				{
+					PrintIndexOutOfRange();
+					break;
+				}
+				RemoveElementAtIndex(array, index);
+				PrintArray(array);
+				break;
+			}
+			case 4:
+			{
+				//TODO: RSDN
+				cout << "Enter the value of the element ";
+				cout << "that you want to add to the ";
+				cout << "first position of the array: ";
+				int element;
+				element = TryInput();
+				InsertElement(array, element, 0);
+				cout << "\n";
+				PrintArray(array);
+				break;
+			}
+			case 5:
+			{
+				//TODO: RSDN
+				PrintArray(array);
+				cout << "\nEnter the index of the element ";
+				cout << "after which the new element should be placed: ";
+				int index;
+				index = TryInput();
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				if (CheckIndexOutRange(array, index))
+				{
+					PrintIndexOutOfRange();
+					break;
+				}
+				cout << "\nEnter the value of the element";
+				cout << " that you want to add to the array: ";
+				int element;
+				element = TryInput();
+				InsertElement(array, element, index);
+				cout << "\n";
+				PrintArray(array);
+				break;
+			}
+			case 6:
+			{
+				ArraySort(array);
+				PrintArray(array);
+				break;
+			}
+			case 7:
+			{
+				//TODO: RSDN
+				PrintArray(array);
+				cout << "\nEnter the element,";
+				cout << " whose index needs to be found : ";
+				int element;
+				element = TryInput();
+				int result;
+				result = LinearSearch(array, element);
+				PrintIndexOfElement(result, element);
+				break;
+			}
+			case 8:
+			{
+				PrintArray(array);
+				cout << "\nEnter the element,";
+				cout <<	" whose index needs to be found : ";
+				int element;
+				element = TryInput();
+				int result = BinarySearch(array, element);
+				PrintIndexOfElement(result, element);
 
-			break;
-		}
-		case 8:
-		{
-			int element;
-
-			PrintArray(array);
-			cout << "\nEnter the element, whose index needs to be found: ";
-			element = TryInput();
-			int result = BinarySearch(array, element);
-			//TODO:дубль
-			PrintIndexOfElement(result, element);
-
-			break;
-		}
-		case 9:
-		{
-			ReInitializeDynamicArray(array);
-			cout << "The array has been successfully reinitialized" << endl;
-			break;
-		}
-		default:
-		{
-			cout << "\nYou entered the incorrect number" << endl;
-		}
+				break;
+			}
+			case 9:
+			{
+				ReInitializeDynamicArray(array);
+				cout << "The array has been successfully";
+				cout << " reinitialized" << endl;
+				break;
+			}
+			default:
+			{
+				cout << "\nYou entered the incorrect number" << endl;
+			}
 		}
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');

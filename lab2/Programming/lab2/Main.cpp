@@ -3,8 +3,6 @@
 
 using namespace std;
 
-int counter = 0;
-
 void PrintMenu()
 {
 	system("cls");
@@ -112,15 +110,8 @@ int main()
 		case 1:
 		{
 			struct Node* tempList = new Node;
-			tempList = node;
-			if (tempList->Prev != NULL)
-			{
-				//do {
-				//	tempList = tempList->Prev;
-				//} while (tempList->Prev != NULL);
-				PrintList(headNode);
-			}
-			else if (tempList->Next != NULL)
+			tempList = headNode;
+			if (tempList->Next != NULL)
 			{
 				PrintList(tempList);
 			}
@@ -142,20 +133,10 @@ int main()
 		}
 		case 3:
 		{
-			struct Node* tempList = new Node;
-			tempList = node;
 			int element;
 			cout << "Enter the value of the element that you want to delete from the list: ";
 			element = TryInput();
-			tempList = RemoveItemFromList(node, element);
-			if (tempList == NULL)
-			{
-				cout << "\nError, you can't delete the only one value in the list or value is not found" << endl;
-			}
-			else
-			{
-				node = tempList;
-			}
+			headNode = RemoveItemFromList(headNode, element);
 			break;
 		}
 		case 4:
@@ -164,6 +145,7 @@ int main()
 			cout << "Enter the value of the element that you want to add: ";
 			element = TryInput();
 			node = AddItemToFirstPositionInList(node, element);
+			headNode = node;
 			break;
 		}
 		default:

@@ -1,40 +1,18 @@
-﻿/**
-\file
-\brief Класс DynamicArray
-Данный файл содержит в себе некоторые действия,
-связанные с изменением его размера
-*/
-#include "ArrayActions.h"
+﻿#include "ArrayActions.h"
 #include <iostream>
 
 using namespace std;
 
-//TODO: внести в структуру
-//int capacity = 8;
-
-/**
-Проверяет, выходит ли принимаемый индекс
-за границы динамического массива
-\param array Динамический массив
-\param index Принимаемый индекс
-\return Булевое значение да или нет
-*/
 bool CheckIndexOutRange(DynamicArray* array, int index)
 {
 	return index < 0 || index > array->Length - 1;
 }
 
-/**
-Увеличивает размер динамического массива, при приближении
-его размера к буферу
-\param array Динамический массив
-*/
-void IncreaseDynamicArray(DynamicArray* array)
+void CheckLengthDynamicArray(DynamicArray* array)
 {
+	//TODO: дублировани
 	if (array->Length >= array->Capacity)
 	{
-		//TODO: growth factor
-		//TODO: уменьшение размера динамического массива
 		int* tempArray = new int[array->Length];
 		for (int i = 0; i < array->Length; i++)
 		{
@@ -49,16 +27,7 @@ void IncreaseDynamicArray(DynamicArray* array)
 		}
 		delete[] tempArray;
 	}
-}
-
-/**
-Уменьшает размер динамического массива, при приближении
-его размера к буферу
-\param array Динамический массив
-*/
-void DecreaseDynamicArray(DynamicArray* array)
-{
-	if (array->Capacity - array->Length
+	else if (array->Capacity - array->Length
 		> array->ConstCapacity)
 	{
 		int* tempArray = new int[array->Length];

@@ -28,11 +28,39 @@ struct Node* AddItemToList(Node* node, int value)
 struct Node* RemoveItemFromList(Node* node, int element)
 {
 	struct Node* tempNode = new Node;
+	bool flag = false;
 	tempNode = node;
-	do {
-		tempNode->
-	} while (tempNode->Data != element)
-	return(tempNode);
+	if (tempNode->Next != NULL)
+	{
+		do {
+			if (tempNode->Data == element)
+			{
+				flag = true;
+				break;
+			}
+			tempNode = tempNode->Next;
+		} while (tempNode->Next != NULL);
+	}
+
+	if (flag = true)
+	{
+		if (tempNode->Prev != NULL)
+		{
+			tempNode->Prev->Next = tempNode->Next;
+		}
+		if (tempNode->Next != NULL)
+		{
+			tempNode->Next->Prev = tempNode->Prev;
+		}
+	}
+
+	if (tempNode->Prev != NULL)
+	{
+		do {
+			tempNode = tempNode->Prev;
+		} while (tempNode->Prev != NULL);
+	}
+	return tempNode;
 }
 
 struct Node* AddItemToFirstPositionInList(Node* node, int value)

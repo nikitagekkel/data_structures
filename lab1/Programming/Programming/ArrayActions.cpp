@@ -1,32 +1,16 @@
-/**
-\file
-\brief Класс ArrayActions
-Данный класс содержит в себе функции
-динамического массива
-*/
 #include "DynamicArray.h"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
-/**
-Функция, добавляюющая элемент в динамический массив
-\param array Динамический массив
-\param element Добавляемый элемент
-*/
-void AddElementInArray(DynamicArray* array, int element)
+void AddElementToArray(DynamicArray* array, int element)
 {
-	IncreaseDynamicArray(array);
+	CheckLengthDynamicArray(array);
 	array->Length++;
 	array->Array[array->Length - 1] = element;
 }
 
-/**
-Функция, удаляющая элемент из динамического массив
-\param array Динамический массив
-\param element Удаляемый элемент
-*/
 void RemoveElementAtIndex(DynamicArray* array, int index)
 {
 	for (int i = index; i < array->Length - 1; i++)
@@ -35,63 +19,23 @@ void RemoveElementAtIndex(DynamicArray* array, int index)
 	}
 
 	array->Length--;
-	DecreaseDynamicArray(array);
+	CheckLengthDynamicArray(array);
 }
 
-/**
-Функция, добавляющая элемент в начало динамического массив
-\param array Динамический массив
-\param element Добавляемый элемент
-*/
-void InsertElementToFirstPosition(DynamicArray* array, int element)
+void InsertElement(DynamicArray* array, int element, int index)
 {
-	IncreaseDynamicArray(array);
+	//TODO: Дублирование
+	CheckLengthDynamicArray(array);
 	array->Length++;
 
-	int* tempArray = new int[array->Length];
-	tempArray[0] = element;
-	for (int i = 1; i < array->Length; i++)
+	for (int i = 0; i < array->Length - index; i++)
 	{
-		tempArray[i] = array->Array[i - 1];
+		array->Array[array->Length - i] = array->Array[array->Length - i - 1];
 	}
-	delete[] array->Array;
-	array->Array = tempArray;
+	array->Array[index] = element;
 }
 
-/**
-Функция, добавляющая элемент
-после существующего элемента динамического массива
-\param array Динамический массив
-\param index Индекс существующего элемента
-\param element Добавляемый элемент
-*/
-#pragma warning(push)
-#pragma warning(disable:6386)
-void InsertElementAtIndex(DynamicArray* array, int index, int element)
-{
-	IncreaseDynamicArray(array);
-	array->Length++;
 
-	index += 1;
-	int* tempArray = new int[array->Length];
-	tempArray[index] = element;
-	for (int i = 0; i < index; i++)
-	{
-		tempArray[i] = array->Array[i];
-	}
-	for (int i = index; i < array->Length - 1; i++)
-	{
-		tempArray[i + 1] = array->Array[i];
-	}
-	delete[] array->Array;
-	array->Array = tempArray;
-}
-#pragma warning(pop)
-
-/**
-Функция, сортирующая динамический массив по возрастанию
-\param array Динамический массив
-*/
 void ArraySort(DynamicArray* array)
 {
 	for (int i = 0; i < array->Length - 1; i++)
@@ -106,12 +50,6 @@ void ArraySort(DynamicArray* array)
 	}
 }
 
-/**
-Функция, реализующая линейный поиск в динамическом массиве
-\param array Динамический массив
-\param element Элемент, индекс которого нужно найти
-\return Найденный индекс
-*/
 int LinearSearch(DynamicArray* array, int element)
 {
 	int count = 0;
@@ -131,12 +69,6 @@ int LinearSearch(DynamicArray* array, int element)
 	return result;
 }
 
-/**
-Функция, реализующая бинарный поиск в динамическом массиве
-\param array Динамический массив
-\param element Элемент, индекс которого нужно найти
-\return Найденный индекс
-*/
 int BinarySearch(DynamicArray* array, int element)
 {
 	ArraySort(array);
@@ -165,10 +97,6 @@ int BinarySearch(DynamicArray* array, int element)
 	return result;
 }
 
-/**
-Функция, реализующая реинициализацию динамического массива
-\param array Динамический массив
-*/
 void ReInitializeDynamicArray(DynamicArray* array)
 {
 	array->Capacity = array->ConstCapacity;
