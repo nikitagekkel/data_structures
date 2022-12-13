@@ -10,32 +10,25 @@ bool CheckIndexOutRange(DynamicArray* array, int index)
 
 void CheckLengthDynamicArray(DynamicArray* array)
 {
-	//TODO: дублировани
-	if (array->Length >= array->Capacity)
+	if (array->Length >= array->Capacity ||
+		array->Length == array->Capacity / array->GrowthFactor)
 	{
 		int* tempArray = new int[array->Length];
 		for (int i = 0; i < array->Length; i++)
 		{
 			tempArray[i] = array->Array[i];
 		}
-		array->Capacity += array->ConstCapacity;
-		delete[] array->Array;
-		array->Array = new int[array->Capacity];
-		for (int i = 0; i < array->Capacity; i++)
+
+		if (array->Length == array->Capacity)
 		{
-			array->Array[i] = tempArray[i];
+			array->Capacity = array->Capacity * array->GrowthFactor;
 		}
-		delete[] tempArray;
-	}
-	else if (array->Capacity - array->Length
-		> array->ConstCapacity)
-	{
-		int* tempArray = new int[array->Length];
-		for (int i = 0; i < array->Length; i++)
+		else if (array->Length == array->Capacity / array->GrowthFactor
+			&& array->Capacity > array->ConstCapacity)
 		{
-			tempArray[i] = array->Array[i];
+			array->Capacity = array->Capacity / array->GrowthFactor;
 		}
-		array->Capacity -= array->ConstCapacity;
+
 		delete[] array->Array;
 		array->Array = new int[array->Capacity];
 		for (int i = 0; i < array->Capacity; i++)

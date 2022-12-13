@@ -24,7 +24,6 @@ void RemoveElementAtIndex(DynamicArray* array, int index)
 
 void InsertElement(DynamicArray* array, int element, int index)
 {
-	//TODO: Дублирование
 	CheckLengthDynamicArray(array);
 	array->Length++;
 
@@ -71,29 +70,29 @@ int LinearSearch(DynamicArray* array, int element)
 
 int BinarySearch(DynamicArray* array, int element)
 {
-	ArraySort(array);
-
-	int middle = 0;
 	int left = 0;
-	int right = array->Length;
-	while (right - left > 1)
+	int right = array->Length - 1;
+	int index = 0;
+	int result = -1;
+
+	while (left <= right)
 	{
-		middle = (left + right) / 2;
-		if (array->Array[middle] < element)
+		index = (right + left) / 2;
+		if (array->Array[index] == element)
 		{
-			left = middle;
+			result = index;
+			break;
+		}
+		if (array->Array[index] < element)
+		{
+			left = index + 1;
 		}
 		else
 		{
-			right = middle;
+			right = index - 1;
 		}
 	}
-	int result = 0;
-	result = right;
-	if (array->Array[result] != element)
-	{
-		result = -1;
-	}
+
 	return result;
 }
 

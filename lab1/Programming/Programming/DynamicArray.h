@@ -1,11 +1,34 @@
 #pragma once
 
-//TODO: комментарии0
+/**
+Структура Динамический массив
+*/
 struct DynamicArray
 {
-	int Length = 0;
+	//TODO: RSDN
+	/**
+	Гроу-фактор динамического массива
+	*/
+	const int GrowthFactor = 2;
+	
+	/**
+	Первично заданный буфер динамического массива
+	*/
 	const int ConstCapacity = 8;
+
+	/**
+	Длина динамического массива
+	*/
+	int Length = 0;
+
+	/**
+	Буфер динамического массива 
+	*/
 	int Capacity = ConstCapacity;
+
+	/**
+	Динамический массив
+	*/
 	int* Array = new int[Length + Capacity];
 };
 

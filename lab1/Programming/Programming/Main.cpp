@@ -86,18 +86,15 @@ int TryInput()
 */
 int main()
 {
-	//TODO: внести
 	DynamicArray* array = new DynamicArray;
 	while (true)
 	{
 		PrintMenu();
 		cout << "\nEnter nubmer of action: ";
-		int variant = 0;
-		variant = TryInput();
+		int variant = TryInput();
 		system("cls");
 		switch (variant)
 		{
-			//TODO: RSDN
 			case 0:
 			{
 				cout << "Program finished" << "\n";
@@ -111,10 +108,8 @@ int main()
 			}
 			case 2:
 			{
-				//TODO: RSDN
 				cout << "Enter the value of the element that you want to add to the array: ";
-				int element = 0;
-				element = TryInput();
+				int element = TryInput();
 				AddElementToArray(array, element);
 				cout << "\n";
 				PrintArray(array);
@@ -122,11 +117,9 @@ int main()
 			}
 			case 3:
 			{
-				//TODO: RSDN
 				PrintArray(array);
 				cout << "Enter the index of the element to remove: ";
-				int index = 0;
-				index = TryInput();
+				int index = TryInput();
 				if (CheckIndexOutRange(array, index))
 				{
 					PrintIndexOutOfRange();
@@ -138,12 +131,10 @@ int main()
 			}
 			case 4:
 			{
-				//TODO: RSDN
 				cout << "Enter the value of the element ";
 				cout << "that you want to add to the ";
 				cout << "first position of the array: ";
-				int element = 0;
-				element = TryInput();
+				int element = TryInput();
 				InsertElement(array, element, 0);
 				cout << "\n";
 				PrintArray(array);
@@ -151,12 +142,10 @@ int main()
 			}
 			case 5:
 			{
-				//TODO: RSDN
 				PrintArray(array);
 				cout << "\nEnter the index of the element ";
 				cout << "after which the new element should be placed: ";
-				int index = 0;
-				index = TryInput();
+				int index = TryInput();
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				if (CheckIndexOutRange(array, index))
@@ -166,8 +155,7 @@ int main()
 				}
 				cout << "\nEnter the value of the element";
 				cout << " that you want to add to the array: ";
-				int element = 0;
-				element = TryInput();
+				int element = TryInput();
 				InsertElement(array, element, index);
 				cout << "\n";
 				PrintArray(array);
@@ -181,24 +169,22 @@ int main()
 			}
 			case 7:
 			{
-				//TODO: RSDN
 				PrintArray(array);
 				cout << "\nEnter the element,";
 				cout << " whose index needs to be found : ";
-				int element = 0;
-				element = TryInput();
-				int result = 0;
-				result = LinearSearch(array, element);
+				int element = TryInput();
+				int result = LinearSearch(array, element);
 				PrintIndexOfElement(result, element);
 				break;
 			}
 			case 8:
 			{
+				ArraySort(array);
+				cout << "Array was successfully sorted" << endl << "\n";
 				PrintArray(array);
 				cout << "\nEnter the element,";
 				cout <<	" whose index needs to be found : ";
-				int element = 0;
-				element = TryInput();
+				int element = TryInput();
 				int result = BinarySearch(array, element);
 				PrintIndexOfElement(result, element);
 
@@ -213,7 +199,7 @@ int main()
 			}
 			default:
 			{
-				cout << "\nYou entered the incorrect number" << endl;
+				cout << "You entered the incorrect number" << endl;
 			}
 		}
 		cin.clear();

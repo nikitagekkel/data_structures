@@ -1,21 +1,23 @@
-#include <iostream>
+п»ї#include <iostream>
 #include "List.h"
+#include "Test.h"
 
 using namespace std;
 
 void PrintMenu()
 {
 	system("cls");
+	cout << "Doubly linked list" << endl;
 	cout << "0. Exit" << endl;
 	cout << "1. Show the list" << endl;
 	cout << "2. Add element to the list" << endl;
 	cout << "3. Remove element from the list" << endl;
 	cout << "4. Add element to the first position in the list" << endl;
-	//cout << "5. Add element after the existing element" << endl;
-	//cout << "6. Sort array" << endl;
-	//cout << "7. Linear search for an element in the array" << endl;
-	//cout << "8. Binary search for an element in the array" << endl;
-	//cout << "9. Reinitialize array" << endl;
+	cout << "5. Add element after the existing element" << endl;
+	cout << "6. Add element before the existing element" << endl;
+	cout << "7. Sort the list" << endl;
+	cout << "8. Linear search" << endl;
+	cout << "9. Measuring the working time" << endl;
 }
 
 int TryInput()
@@ -33,125 +35,189 @@ int TryInput()
 	return element;
 }
 
-void PrintList(Node* list)
+void PrintList(Node* head)
 {
-	cout << "List: ";
-	struct Node* tempList;
-	tempList = list;
-	do {
-		printf("%d ", tempList->Data); // вывод значения элемента p
-		tempList = tempList->Next; // переход к следующему узлу
-	} while (tempList != NULL); // условие окончания обхода
+	if (head == nullptr)
+	{
+		cout << "List is empty";
+	}
+	else if (head->Next != nullptr)
+	{
+		cout << "List: ";
+		do {
+			printf("%d ", head->Data);
+			head = head->Next;
+		} while (head != nullptr);
+	}
+	else
+	{
+		cout << "List: " << head->Data;
+	}
 }
 
 int main()
-{
-	int variant;
-	Node* node = new Node;
-	Node* headNode = new Node;
-
-	while (true)
-	{
-		bool runnig = false;
-		system("cls");
-		cout << "0. Exit" << endl;
-		cout << "1. Initialize new list" << endl;
-		cout << "\nEnter nubmer of action: ";
-		variant = TryInput();
-		system("cls");
-		switch (variant)
-		{
-		case 0:
-		{
-			cout << "Program finished" << "\n";
-			return -1;
-			break;
-		}
-		case 1:
-		{
-			int element;
-			cout << "Enter the value of root: ";
-			element = TryInput();
-			node = InitializeList(element);
-			headNode = node;
-			cout << "\nNew list was successfully created" << endl;
-			runnig = true;
-			break;
-		}
-		default:
-		{
-			cout << "You entered the incorrect number" << endl;
-		}
-		}
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "\n";
-		system("pause");
-		if (runnig == true)
-		{
-			break;
-		}
-	}
-
+{;
+	List* list = new List();
 	while (true)
 	{
 		PrintMenu();
 		cout << "\nEnter nubmer of action: ";
-		variant = TryInput();
+		int variant = TryInput();
 		system("cls");
 		switch (variant)
 		{
-		case 0:
-		{
-			cout << "Program finished" << "\n";
-			return -1;
-			break;
-		}
-		case 1:
-		{
-			struct Node* tempList = new Node;
-			tempList = headNode;
-			if (tempList->Next != NULL)
+			case 0:
 			{
-				PrintList(tempList);
+				cout << "Program finished" << "\n";
+				return -1;
+				break;
 			}
-			else
+
+			case 1:
 			{
-				cout << "List: ";
-				printf("%d ", tempList->Data);
+				PrintList(list->Head);
+				cout << endl;
+				break;
 			}
-			cout << "\n";
-			break;
-		}
-		case 2:
-		{
-			int element;
-			cout << "Enter the value of the element that you want to add: ";
-			element = TryInput();
-			node = AddItemToList(node, element);
-			break;
-		}
-		case 3:
-		{
-			int element;
-			cout << "Enter the value of the element that you want to delete from the list: ";
-			element = TryInput();
-			headNode = RemoveItemFromList(headNode, element);
-			break;
-		}
-		case 4:
-		{
-			int element;
-			cout << "Enter the value of the element that you want to add: ";
-			element = TryInput();
-			node = AddItemToFirstPositionInList(node, element);
-			headNode = node;
-			break;
-		}
-		default:
-		{
-			cout << "You entered the incorrect number" << endl;
-		}
+
+			case 2:
+			{
+				cout << "Enter the value of the element ";
+				cout << "that you want to add: ";
+				int element = TryInput();
+
+				AddItemToList(list, element);
+				cout << "\nElement was was successfully added" << endl;
+				break;
+			}
+
+			case 3:
+			{
+				cout << "Enter the index of the element";
+				cout << " that you want to delete from the list: ";
+				int index = TryInput();
+
+				bool isFound = RemoveItemFromList(list, index);
+				if (isFound == false)
+				{
+					cout << "\nELement under index ";
+					cout << index << " not found" << endl;
+				}
+				else
+				{
+					cout << "\nElement was successfully deleted" << endl;
+				}
+				break;
+			}
+
+			case 4:
+			{
+				cout << "Enter the value of the element";
+				cout << " that you want to add to the first positon";
+				cout << " of the list: ";
+				int element = TryInput();
+				
+				AddItemToFirstPositionInList(list, element);
+				cout << "\nElement was successfully added to the list";
+				cout << endl;
+				break;
+			}
+
+			case 5:
+			{
+				cout << "Enter the value of the element: ";
+				int element = TryInput();
+
+				cout << "\nEnter the index of the existing element: ";
+				int index = TryInput();
+
+				bool isFound = AddItemAfter(list, index, element);
+				if (isFound == false)
+				{
+					cout << "\nELement under index " << index;
+					cout << " not found" << endl;
+				}
+				else
+				{
+					cout << "\nElement was was successfully added" << endl;
+				}
+				break;
+			}
+
+			case 6:
+			{
+				cout << "Enter the value of the element: ";
+				int element = TryInput();
+
+				cout << "\nEnter the index of existing the element: ";
+				int index = TryInput();
+
+				bool isFound = AddItemBefore(list, index, element);
+				if (isFound == false)
+				{
+					cout << "\nELement under index " << index;
+					cout << " not found" << endl;
+				}
+				else
+				{
+					cout << "\nElement was was successfully added" << endl;
+				}
+				break;
+			}
+
+			case 7:
+			{
+				bool isSorted = InsertionSort(list);
+				if (isSorted == true)
+				{
+					cout << "List has been successfully sorted" << endl;
+				}
+				else
+				{
+					cout << "List is empty and can't be sorted" << endl;
+				}
+				break;
+			}
+
+			case 8:
+			{
+				cout << "Enter the element to find in the list: ";
+				int element = TryInput();
+				int index = LinearSearch(list, element);
+				if (index != -1)
+				{
+					cout << "\nIndex of the element " << element;
+					cout << " is " << index << endl;
+				}
+				break;
+			}
+
+			case 9:
+			{
+				cout << "1. Insert time test" << endl;
+				cout << "2. Deletion time test" << endl;
+				cout << "\nEnter nubmer of action: ";
+				int variant = TryInput();
+				system("cls");
+				if (variant == 1)
+				{
+					InsertTimeTest();
+				}
+				else if (variant == 2)
+				{
+					DeletionTimeTest();
+				}
+				else
+				{
+					cout << "You entered the incorrect number" << endl;
+				}
+				break;
+			}
+
+			default:
+			{
+				cout << "You entered the incorrect number" << endl;
+			}
 		}
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
