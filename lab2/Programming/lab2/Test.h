@@ -1,4 +1,6 @@
 #pragma once
 
-void InsertTimeTest();
-void DeletionTimeTest();
+/**
+Сравнение времени работы операций
+*/
+void TestOperations();

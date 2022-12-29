@@ -3,6 +3,12 @@
 
 using namespace std;
 
+/**
+Переход к узлу в двусвязном списке по индексу
+\param list Двусвязный список
+\param index Индекс разыскиваемого узла
+\return Разыскиваемый узел
+*/
 Node* NodeSearch(List* list, int index)
 {
 	Node* node = new Node;

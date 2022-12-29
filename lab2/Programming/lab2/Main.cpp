@@ -4,6 +4,9 @@
 
 using namespace std;
 
+/**
+Вывод в консоль пунктов меню
+*/
 void PrintMenu()
 {
 	system("cls");
@@ -20,6 +23,9 @@ void PrintMenu()
 	cout << "9. Measuring the working time" << endl;
 }
 
+/**
+Ввод значения в переменную с валидацией
+*/
 int TryInput()
 {
 	int element;
@@ -35,6 +41,9 @@ int TryInput()
 	return element;
 }
 
+/**
+Вывод двусвязного списка
+*/
 void PrintList(Node* head)
 {
 	if (head == nullptr)
@@ -55,6 +64,9 @@ void PrintList(Node* head)
 	}
 }
 
+/**
+Работа с меню и вызов его функций
+*/
 int main()
 {;
 	List* list = new List();
@@ -98,6 +110,7 @@ int main()
 				int index = TryInput();
 
 				bool isFound = RemoveItemFromList(list, index);
+				//TODO: duplication
 				if (isFound == false)
 				{
 					cout << "\nELement under index ";
@@ -132,6 +145,7 @@ int main()
 				int index = TryInput();
 
 				bool isFound = AddItemAfter(list, index, element);
+				//TODO: duplication
 				if (isFound == false)
 				{
 					cout << "\nELement under index " << index;
@@ -153,6 +167,7 @@ int main()
 				int index = TryInput();
 
 				bool isFound = AddItemBefore(list, index, element);
+				//TODO: duplication
 				if (isFound == false)
 				{
 					cout << "\nELement under index " << index;
@@ -189,28 +204,13 @@ int main()
 					cout << "\nIndex of the element " << element;
 					cout << " is " << index << endl;
 				}
+				//TODO: add output
 				break;
 			}
 
 			case 9:
 			{
-				cout << "1. Insert time test" << endl;
-				cout << "2. Deletion time test" << endl;
-				cout << "\nEnter nubmer of action: ";
-				int variant = TryInput();
-				system("cls");
-				if (variant == 1)
-				{
-					InsertTimeTest();
-				}
-				else if (variant == 2)
-				{
-					DeletionTimeTest();
-				}
-				else
-				{
-					cout << "You entered the incorrect number" << endl;
-				}
+				TestOperations();
 				break;
 			}
 

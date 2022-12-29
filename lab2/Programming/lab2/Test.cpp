@@ -1,49 +1,68 @@
 #include <iostream>
-#include "List.h"
 #include <chrono>
 #include <iomanip>
+#include "List.h"
 
 using namespace std;
 
-void InsertTimeTest()
+/**
+Очистка двусвязного списка
+\param list Двусвязный список
+*/
+void RemoveList(List* list)
 {
-	List* list = new List;
-	clock_t c_start = clock();
-
-	for (int step = 0; step < 1010000; step +=10000)
+	if (list->Head == nullptr)
 	{
-		auto t_start = chrono::high_resolution_clock::now();
-		AddItemToList(list, (rand() % 9));
-		clock_t c_end = clock();
-		auto t_end = chrono::high_resolution_clock::now();
-
-		cout << "For " << step;
-		cout << fixed << setprecision(2) << " CPU time used: "
-			<< 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms\n";
+		return;
 	}
-	delete list;
+
+	int index = 0;
+	Node* temp = list->Head->Next;
+
+	while (temp != nullptr)
+	{
+		delete temp->Prev;
+		list->Length--;
+		temp = temp->Next;
+	}
+
+	delete temp;
+	list->Length--;
+	list->Head = nullptr;
+	list->Tail = nullptr;
 }
 
-void DeletionTimeTest()
+/**
+Заполнение двусвязного списка случайными элементами
+\param list Двусвязный список
+\param count Количество элементов
+*/
+void RandomValues(List* list, int count)
 {
-	List* list = new List;
-	clock_t c_start = std::clock();
+	srand(time(nullptr));
 
-	for (int step = 0; step < 100; step ++)
+	for (int i = 0; i < count; i++)
 	{
-		AddItemToList(list, (rand() % 9));
+		AddItemToList(list, rand() % 100);
 	}
+}
 
-	for (int step = 0; step < 100; step++)
+void TestOperations()
+{
+	List* list = new List();
+
+	for (int step = 10000; step <= 1000000; step += 10000)
 	{
-		auto t_start = chrono::high_resolution_clock::now();
-		RemoveItemFromList(list, step);
-		clock_t c_end = clock();
-		auto t_end = chrono::high_resolution_clock::now();
+		RemoveList(list);
+		int testValue = 10;
+		RandomValues(list, step);
+		auto start = chrono::steady_clock::now();
+		/*AddItemToFirstPositionInList(list, testValue);*/
+		/*AddItemBefore(list, list->Length / 2, testValue);*/
+		RemoveItemFromList(list, list->Length / 2);
+		auto end = chrono::steady_clock::now();
 
-		cout << "For " << step;
-		cout << fixed << setprecision(2) << " CPU time used: "
-			<< 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms\n";
+		cout << chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+			<< ", " << step << endl;
 	}
-	delete list;
 }

@@ -1,11 +1,18 @@
 #pragma once
-
+//TODO: comments
+/**
+Структура узла двусвязного списка
+*/
 struct Node {	
 	int Data = 0;
 	Node *Next = nullptr;
 	Node *Prev = nullptr;
 };
 
+//TODO: comments
+/**
+Структура двусвязного списка
+*/
 struct List
 {
 	int Length = 0;
@@ -13,11 +20,57 @@ struct List
 	Node* Tail = nullptr;
 };
 
-
+/**
+Функция, добавляющая элемент в двусвязный список
+\param list Двусвязный список
+\param value Добавляемое значение
+*/
 void AddItemToList(List* list, int value);
+
+/**
+Функция, удаляющая элемент из двусвязного списка
+\param list Двусвязный список
+\param index Индекс удаляемого элемента
+\return Булевое значение да или нет - удалось ли выполнить функцию
+*/
 bool RemoveItemFromList(List* list, int index);
+
+/**
+Функция, добавляющая элемент в начало двусвязного списка
+\param list Двусвязный список
+\param value Добавляемое значение
+*/
 void AddItemToFirstPositionInList(List* list, int value);
+
+/**
+Функция, добавляющая элемент после существующего элемента в двусвязном списке
+\param list Двусвязный список
+\param index Индекс существующего элемента
+\param value Добавляемое значение
+\return Булевое значение да или нет - удалось ли выполнить функцию
+*/
 bool AddItemAfter(List* list, int index, int value);
+
+/**
+Функция, добавляющая элемент до существующего элемента в двусвязном списке
+\param list Двусвязный список
+\param index Индекс существующего элемента
+\param value Добавляемое значение
+\return Булевое значение да или нет - удалось ли выполнить функцию
+*/
 bool AddItemBefore(List* list, int index, int value);
+
+/**
+Функция, сортирующая двусвязный список
+\param list Двусвязный список
+\return Булевое значение да или нет - удалось ли выполнить функцию
+*/
 bool InsertionSort(List* list);
+
+/**
+Функция, реализуюшая линейный поиск в двусвязном списке
+\param list Двусвязный список
+\param list Элемент, который необходимо найти
+\return Индекс разыскиваемого элемента (-1, если элемент не найден)
+*/
 int LinearSearch(List* list, int element);
