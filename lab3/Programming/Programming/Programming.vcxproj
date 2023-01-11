@@ -143,11 +143,13 @@
     <ClCompile Include="RingBufferQueue.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="StackQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="RingBufferQueue.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="StackQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

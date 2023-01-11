@@ -2,6 +2,7 @@
 #include "Stack.h"
 #include "RingBuffer.h"
 #include "RingBufferQueue.h"
+#include "StackQueue.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ void PrintMenu()
 {
 	system("cls");
 	cout << "0. Exit" << endl;
-	cout << "Stack" << endl;
+	cout << "\nStack" << endl;
 	cout << "1. Initialize stack" << endl;
 	cout << "2. Show the stack" << endl;
 	cout << "3. Add element to the stack" << endl;
@@ -30,15 +31,17 @@ void PrintMenu()
 
 	cout << "\nRing buffer queue" << endl;
 	cout << "13. Init queue" << endl;
-	cout << "14. Add element in queue" << endl;
-	cout << "15. Get element from queue" << endl;
-	cout << "16. Delete queue" << endl;
+	cout << "14. Show the queue" << endl;
+	cout << "15. Add element in queue" << endl;
+	cout << "16. Get element from queue" << endl;
+	cout << "17. Delete queue" << endl;
 
 	cout << "\nStack queue" << endl;
-	cout << "17. Delete buffer" << endl;
-	cout << "18. Delete buffer" << endl;
-	cout << "19. Delete buffer" << endl;
-	cout << "20. Delete buffer" << endl;
+	cout << "18. Init queue" << endl;
+	cout << "19. Show the queue" << endl;
+	cout << "20. Add element in queue" << endl;
+	cout << "21. Get element from queue" << endl;
+	cout << "22. Delete queue" << endl;
 }
 
 /**
@@ -120,35 +123,12 @@ void PrintRingBuffer(RingBuffer* buffer)
 	}
 }
 
-/**
-Вывод очереди на основе кольцевого буфера в консоль
-\param QueueRingBuffer* queue выводимая очередь
-*/
-void PrintRingBufferQueue(QueueRingBuffer* queue)
-{
-	int index = queue->Buffer->IndexOutput;
-
-	for (int i = 0; i < queue->Buffer->UsedMemory; i++)
-	{
-		cout << queue->Buffer->Buffer[index++] << " -> ";
-
-		if (index > queue->Buffer->Size - 1)
-		{
-			index = 0;
-		}
-	}
-	if (queue->Buffer->FreeMemory == queue->Buffer->Size)
-	{
-		cout << "Buffer is empty" << endl;
-	}
-	cout << endl;
-}
-
 int main()
 {
 	Stack* stack = nullptr;
 	RingBuffer* buffer = nullptr;
 	QueueRingBuffer* ringBufferQueue = nullptr;
+	StackQueue* stackQueue = nullptr;
 	while (true)
 	{
 		PrintMenu();
@@ -157,221 +137,355 @@ int main()
 		system("cls");
 		switch (variant)
 		{
-		case 0:
-		{
-			cout << "Program finished" << "\n";
-			return -1;
-			break;
-		}
-
-		case 1:
-		{
-			if (stack != nullptr)
+			case 0:
 			{
-				cout << "Stack is alredy initilized" << endl;
+				cout << "Program finished" << "\n";
+				return -1;
 				break;
 			}
 
-			cout << "Enter size of the stack: ";
-			int size = TryInput();
-			if (size < 0)
+			case 1:
 			{
-				cout << "\nSize can't be negative" << endl;
+				if (stack != nullptr)
+				{
+					cout << "Stack is alredy initilized" << endl;
+					break;
+				}
+
+				cout << "Enter size of the stack: ";
+				int size = TryInput();
+				if (size < 0)
+				{
+					cout << "\nSize can't be negative" << endl;
+					break;
+				}
+
+				stack = InitStack(size);
+				cout << "\nStack was successfully initialized" << endl;
 				break;
 			}
 
-			stack = InitStack(size);
-			cout << "\nStack was successfully initialized" << endl;
-			break;
-		}
-
-		case 2:
-		{
-			if (IsInitialized(stack, "Stack") == false)
+			case 2:
 			{
+				if (IsInitialized(stack, "Stack") == false)
+				{
+					break;
+				}
+
+				PrintStack(stack);
+				cout << endl;
 				break;
 			}
 
-			PrintStack(stack);
-			cout << endl;
-			break;
-		}
-
-		case 3:
-		{
-			if (IsInitialized(stack, "Stack") == false)
+			case 3:
 			{
+				if (IsInitialized(stack, "Stack") == false)
+				{
+					break;
+				}
+
+				cout << "Enter the element to add to the stack: ";
+				int element = TryInput();
+				PushStack(stack, element);
+				cout << "\nElement was successfully added" << endl;
 				break;
 			}
 
-			cout << "Enter the element to add to the stack: ";
-			int element = TryInput();
-			PushStack(stack, element);
-			cout << "\nElement was successfully added" << endl;
-			break;
-		}
-
-		case 4:
-		{
-			if (IsInitialized(stack, "Stack") == false)
+			case 4:
 			{
+				if (IsInitialized(stack, "Stack") == false)
+				{
+					break;
+				}
+
+				int element = PopStack(stack);
+				if (element != NULL)
+				{
+					cout << "Element " << element;
+					cout << " was succesfully deleted" << endl;
+				}
+				else
+				{
+					cout << "Stack is empty" << endl;
+				}
 				break;
 			}
 
-			bool isDeleted = PopStack(stack);
-			if (isDeleted == true)
+			case 5:
 			{
-				cout << "Element was succesfully deleted" << endl;
-			}
-			else
-			{
-				cout << "Stack is empty" << endl;
-			}
-			break;
-		}
+				if (IsInitialized(stack, "Stack") == false)
+				{
+					break;
+				}
 
-		case 5:
-		{
-			if (IsInitialized(stack, "Stack") == false)
-			{
+				stack = DeleteStack(stack);
+				cout << "Stack was successfully deleted" << endl;
 				break;
 			}
 
-			stack = DeleteStack(stack);
-			cout << "Stack was successfully deleted" << endl;
-			break;
-		}
-
-		case 6:
-		{
-			if (buffer != nullptr)
+			case 6:
 			{
-				cout << "Buffer is alredy initilized" << endl;
+				if (buffer != nullptr)
+				{
+					cout << "Buffer is alredy initilized" << endl;
+					break;
+				}
+
+				cout << "Enter size of the buffer: ";
+				int size = TryInput();
+				if (size < 0)
+				{
+					cout << "\nSize can't be negative" << endl;
+					break;
+				}
+
+				buffer = InitRingBuffer(size);
+				cout << "\nBuffer was successfully initialized" << endl;
 				break;
 			}
 
-			cout << "Enter size of the buffer: ";
-			int size = TryInput();
-			if (size < 0)
+			case 7:
 			{
-				cout << "\nSize can't be negative" << endl;
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
+
+				PrintRingBuffer(buffer);
 				break;
 			}
 
-			buffer = InitRingBuffer(size);
-			cout << "\nBuffer was successfully initialized" << endl;
-			break;
-		}
-
-		case 7:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
+			case 8:
 			{
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
+
+				cout << "Enter the element to add to the buffer: ";
+				int element = TryInput();
+				PushRingBuffer(buffer, element);
+				cout << "\nElement was successfully added" << endl;
 				break;
 			}
 
-			PrintRingBuffer(buffer);
-			break;
-		}
-
-		case 8:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
+			case 9:
 			{
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
+
+				int element = PopRingBuffer(buffer);
+				if (element == NULL)
+				{
+					cout << "Buffer is empty" << endl;
+					break;
+				}
+				else
+				{
+					cout << "Element: " << element << endl;
+				}
 				break;
 			}
 
-			cout << "Enter the element to add to the buffer: ";
-			int element = TryInput();
-			PushRingBuffer(buffer, element);
-			cout << "\nElement was successfully added" << endl;
-			break;
-		}
-
-		case 9:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
+			case 10:
 			{
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
+
+				cout << "Free memory: " << FreeMemoryInfo(buffer) << endl;
 				break;
 			}
 
-			int element = PopRingBuffer(buffer);
-			if (element == NULL)
+			case 11:
 			{
-				cout << "Buffer is empty" << endl;
-				break;
-			}
-			else
-			{
-				cout << "Element: " << element << endl;
-			}
-			break;
-		}
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
 
-		case 10:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
-			{
+				cout << "Used memory: " << UsedMemoryInfo(buffer) << endl;
 				break;
 			}
 
-			cout << "Free memory: " << FreeMemoryInfo(buffer) << endl;
-			break;
-		}
-
-		case 11:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
+			case 12:
 			{
+				if (IsInitialized(buffer, "Buffer") == false)
+				{
+					break;
+				}
+
+				buffer = DeleteRingBuffer(buffer);
+				cout << "Buffer was successfully deleted" << endl;
 				break;
 			}
 
-			cout << "Used memory: " << UsedMemoryInfo(buffer) << endl;
-			break;
-		}
-
-		case 12:
-		{
-			if (IsInitialized(buffer, "Buffer") == false)
+			case 13:
 			{
+				if (ringBufferQueue != nullptr)
+				{
+					cout << "Queue is alredy initilized" << endl;
+					break;
+				}
+
+				cout << "Enter size of the queue: ";
+				int size = TryInput();
+				if (size < 0)
+				{
+					cout << "\nSize can't be negative" << endl;
+					break;
+				}
+
+				ringBufferQueue = InitQueueRingBuffer(size);
+				cout << "\nQueue was successfully initialized" << endl;
 				break;
 			}
 
-			buffer = DeleteRingBuffer(buffer);
-			cout << "Buffer was successfully deleted" << endl;
-			break;
-		}
-
-		case 13:
-		{
-			if (ringBufferQueue != nullptr)
+			case 14:
 			{
-				cout << "Queue is alredy initilized" << endl;
+				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				{
+					break;
+				}
+
+				#pragma warning(push)
+				#pragma warning(disable:6011)
+				PrintRingBuffer(ringBufferQueue->Buffer);
+				#pragma warning(pop)
 				break;
 			}
 
-			cout << "Enter size of the queue: ";
-			int size = TryInput();
-			if (size < 0)
+			case 15:
 			{
-				cout << "\nSize can't be negative" << endl;
+				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				{
+					break;
+				}
+
+				cout << "Enter the element to add to the queue: ";
+				int element = TryInput();
+				EnqueueRingBuffer(ringBufferQueue, element);
+				cout << "\nElement was successfully added" << endl;
 				break;
 			}
 
-			ringBufferQueue = InitQueueRingBuffer(size);
-			cout << "\nQueue was successfully initialized" << endl;
-			break;
-		}
+			case 16:
+			{
+				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				{
+					break;
+				}
 
-		case 14:
-		{
+				int element = DequeueRingBuffer(ringBufferQueue);
+				if (element == NULL)
+				{
+					cout << "Queue is empty" << endl;
+					break;
+				}
+				else
+				{
+					cout << "Element: " << element << endl;
+				}
+				break;
+			}
 
-		}
+			case 17:
+			{
+				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				{
+					break;
+				}
 
-		default:
-		{
-			cout << "You entered the incorrect number" << endl;
-		}
+				ringBufferQueue = DeleteQueueRingBuffer(ringBufferQueue);
+				cout << "Queue was successfully deleted" << endl;
+				break;
+			}
+
+			case 18:
+			{
+				if (stackQueue != nullptr)
+				{
+					cout << "Queue is alredy initilized" << endl;
+					break;
+				}
+
+				cout << "Enter size of the queue: ";
+				int size = TryInput();
+				if (size < 0)
+				{
+					cout << "\nSize can't be negative" << endl;
+					break;
+				}
+
+				stackQueue = InitStackQueue(size);
+				cout << "\nQueue was successfully initialized" << endl;
+				break;
+			}
+
+			case 19:
+			{
+				if (IsInitialized(stackQueue, "Stack queue") == false)
+				{
+					break;
+				}
+				#pragma warning(push)
+				#pragma warning(disable:6011)
+				PrintStack(stackQueue->InputStack);
+				#pragma warning(pop)
+				cout << "\n";
+				PrintStack(stackQueue->OutputStack);
+				break;
+			}
+
+			case 20:
+			{
+				if (IsInitialized(stackQueue, "Stack queue") == false)
+				{
+					break;
+				}
+
+				cout << "Enter the element to add to the queue: ";
+				int element = TryInput();
+				EnqueueStack(stackQueue, element);
+				cout << "\nElement was successfully added" << endl;
+				break;
+			}
+
+			case 21:
+			{
+				if (IsInitialized(stackQueue, "Stack queue") == false)
+				{
+					break;
+				}
+
+				if (LengthStackQueue(stackQueue) > 0)
+				{
+					cout << "Element: " << DequeueStack(stackQueue) << endl;
+				}
+				else
+				{
+					cout << "The queue is empty" << endl;
+				}
+				break;
+			}
+
+			case 22:
+			{
+				if (IsInitialized(stackQueue, "Stack queue") == false)
+				{
+					break;
+				}
+
+				stackQueue = DeleteStackQueue(stackQueue);
+				break;
+			}
+			default:
+			{
+				cout << "You entered the incorrect number" << endl;
+			}
 		}
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "RingBuffer.h"
 
 /**
@@ -25,7 +24,7 @@ QueueRingBuffer* InitQueueRingBuffer(int sizeBuffer);
 \param queue Указатель на очередь
 \param data Добавляемый элемент
 */
-void EnqueueRingBuffer(QueueRingBuffer* queue, int data);
+void EnqueueRingBuffer(QueueRingBuffer* queue, int element);
 
 /**
 Удаление элемента из очереди
@@ -35,14 +34,14 @@ void EnqueueRingBuffer(QueueRingBuffer* queue, int data);
 int DequeueRingBuffer(QueueRingBuffer* queue);
 
 /**
-Удаление очереди
-\param queue Указатель на очередь
-*/
-void DeleteQueueRingBuffer(QueueRingBuffer* queue);
-
-/**
 Получение длины очереди
 \param queue Указатель на очередь
 \return int Длина очереди
 */
 int LenghtQueueRingBuffer(QueueRingBuffer* queue);
+
+/**
+Удаление очереди
+\param queue Указатель на очередь
+*/
+QueueRingBuffer* DeleteQueueRingBuffer(QueueRingBuffer* queue);

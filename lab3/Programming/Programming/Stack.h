@@ -54,10 +54,15 @@ void PushStack(Stack* stack, int element);
 /**
 Удаляет элемент из начала стека
 \param stack указатель на стек
-\return true если элемент удален
-\return false если стек пуст и удаление невозможно
+\return int value значение удаленного элемента
 */
-bool PopStack(Stack* stack);
+int PopStack(Stack* stack);
+
+/**
+Проверка, пустой ли стек
+\param Stack* stack указатель на стек
+*/
+bool IsEmptyStack(Stack* stack);
 
 /**
 Удаляет стек

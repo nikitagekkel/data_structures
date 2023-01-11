@@ -1,4 +1,5 @@
 #include "Stack.h"
+#include <cstddef>
 
 void CheckResize(Stack* stack)
 {
@@ -54,19 +55,26 @@ void PushStack(Stack* stack, int element)
 	stack->Buffer[stack->Top] = element;
 }
 
-bool PopStack(Stack* stack)
+int PopStack(Stack* stack)
 {
-	if (stack->Top != -1)
+	if (!IsEmptyStack(stack))
 	{
+		int value = stack->Buffer[stack->Top];
 		stack->Top--;
 
 		CheckResize(stack);
-		return true;
+
+		return value;
 	}
 	else
 	{
-		return false;
+		return NULL;
 	}
+}
+
+bool IsEmptyStack(Stack* stack)
+{
+	return stack->Top == -1;
 }
 
 Stack* DeleteStack(Stack* stack)
