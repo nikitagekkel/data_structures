@@ -1,57 +1,78 @@
-#include <stdlib.h>
 #include "Stack.h"
 
-using namespace std;
-
-void Push(Stack* stack, int data)
+void CheckResize(Stack* stack)
 {
-	Node* node = new Node();
-	node->Data = data;
+	if (stack->Top >= stack->Capacity - 1)
+	{
+		stack->Capacity = stack->Capacity * stack->GrowthFactor;
+		ResizeStack(stack);
+		return;
+	}
 
-	if (stack->Head == nullptr)
+	if (stack->Top <= (stack->Capacity / stack->GrowthFactor) - 1
+		&& stack->Capacity > 4)
 	{
-		stack->Head = node;
-	}
-	else if (stack->Top == nullptr)
-	{
-		stack->Top = node;
-		stack->Top->Next = stack->Head;
-	}
-	else
-	{
-		Node* top = stack->Top;
-		stack->Top = node;
-		stack->Top->Next = top;
+		stack->Capacity = stack->Capacity / stack->GrowthFactor;
+		ResizeStack(stack);
+		return;
 	}
 }
 
-bool Pop(Stack* stack)
+#pragma warning(push)
+#pragma warning(disable:6386)
+void ResizeStack(Stack* stack)
 {
-	if (stack->Head == nullptr)
+	int* tempArray = new int[stack->Capacity];
+
+	for (int i = 0; i <= stack->Top; i++)
 	{
-		return false;
+		tempArray[i] = stack->Buffer[i];
 	}
-	
-	if (stack->Top == stack->Head)
-	{
-		delete stack->Head;
-		stack->Head = nullptr;
-	}
+
+	delete[] stack->Buffer;
+
+	stack->Buffer = tempArray;
+}
+#pragma warning(pop)
+
+Stack* InitStack(int size)
+{
+	Stack* stack = new Stack();
+
+	stack->Buffer = new int[size];
+	stack->Top = -1;
+	stack->Capacity = size;
+	return stack;
 }
 
-bool DeleteStack(Stack* stack)
+void PushStack(Stack* stack, int element)
 {
-	if (stack->Head == nullptr)
+	stack->Top++;
+
+	CheckResize(stack);
+
+	stack->Buffer[stack->Top] = element;
+}
+
+bool PopStack(Stack* stack)
+{
+	if (stack->Top != -1)
 	{
-		return false;
+		stack->Top--;
+
+		CheckResize(stack);
+		return true;
 	}
 	else
 	{
-		while (stack->Top->Next != nullptr)
-		{
-			Pop(stack);
-		}
+		return false;
 	}
+}
 
-	return true;
+Stack* DeleteStack(Stack* stack)
+{
+	delete[] stack->Buffer;
+	delete stack;
+	stack = nullptr;
+	return stack;
 }

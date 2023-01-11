@@ -65,6 +65,26 @@ void PrintList(Node* head)
 }
 
 /**
+Проверка на нахождение индекса
+и успешность выполнения операции
+\param result Найден ли индекс
+\param index Искомый индекс
+\param operation Производимая операция
+*/
+void IsFound(bool result, int index, string operation)
+{
+	if (result == false)
+	{
+		cout << "\nELement under index ";
+		cout << index << " not found" << endl;
+	}
+	else
+	{
+		cout << "\nElement was successfully " + operation << endl;
+	}
+}
+
+/**
 Работа с меню и вызов его функций
 */
 int main()
@@ -99,7 +119,7 @@ int main()
 				int element = TryInput();
 
 				AddItemToList(list, element);
-				cout << "\nElement was was successfully added" << endl;
+				cout << "\nElement was successfully added" << endl;
 				break;
 			}
 
@@ -109,17 +129,19 @@ int main()
 				cout << " that you want to delete from the list: ";
 				int index = TryInput();
 
-				bool isFound = RemoveItemFromList(list, index);
+				bool result = RemoveItemFromList(list, index);
 				//TODO: duplication
-				if (isFound == false)
-				{
-					cout << "\nELement under index ";
-					cout << index << " not found" << endl;
-				}
-				else
-				{
-					cout << "\nElement was successfully deleted" << endl;
-				}
+				//if (result == false)
+				//{
+				//	cout << "\nELement under index ";
+				//	cout << index << " not found" << endl;
+				//}
+				//else
+				//{
+				//	cout << "\nElement was successfully deleted" << endl;
+				//}
+
+				IsFound(result, index, "deleted");
 				break;
 			}
 
@@ -144,17 +166,19 @@ int main()
 				cout << "\nEnter the index of the existing element: ";
 				int index = TryInput();
 
-				bool isFound = AddItemAfter(list, index, element);
+				bool result = AddItemAfter(list, index, element);
 				//TODO: duplication
-				if (isFound == false)
-				{
-					cout << "\nELement under index " << index;
-					cout << " not found" << endl;
-				}
-				else
-				{
-					cout << "\nElement was was successfully added" << endl;
-				}
+				//if (isFound == false)
+				//{
+				//	cout << "\nELement under index " << index;
+				//	cout << " not found" << endl;
+				//}
+				//else
+				//{
+				//	cout << "\nElement was was successfully added" << endl;
+				//}
+
+				IsFound(result, index, "added");
 				break;
 			}
 
@@ -166,17 +190,19 @@ int main()
 				cout << "\nEnter the index of existing the element: ";
 				int index = TryInput();
 
-				bool isFound = AddItemBefore(list, index, element);
+				bool result = AddItemBefore(list, index, element);
 				//TODO: duplication
-				if (isFound == false)
-				{
-					cout << "\nELement under index " << index;
-					cout << " not found" << endl;
-				}
-				else
-				{
-					cout << "\nElement was was successfully added" << endl;
-				}
+				//if (isFound == false)
+				//{
+				//	cout << "\nELement under index " << index;
+				//	cout << " not found" << endl;
+				//}
+				//else
+				//{
+				//	cout << "\nElement was was successfully added" << endl;
+				//}
+
+				IsFound(result, index, "added");
 				break;
 			}
 
@@ -205,6 +231,10 @@ int main()
 					cout << " is " << index << endl;
 				}
 				//TODO: add output
+				else
+				{
+					cout << "\nElement not found" << endl;
+				}
 				break;
 			}
 
