@@ -57,12 +57,12 @@ void TestOperations()
 		int testValue = 10;
 		RandomValues(list, step);
 		auto start = chrono::steady_clock::now();
-		/*AddItemToFirstPositionInList(list, testValue);*/
-		/*AddItemBefore(list, list->Length / 2, testValue);*/
-		RemoveItemFromList(list, list->Length / 2);
+		//AddItemToFirstPositionInList(list, testValue);
+		AddItemBefore(list, list->Length / 2, testValue);
+		//RemoveItemFromList(list, list->Length / 2);
 		auto end = chrono::steady_clock::now();
 
 		cout << chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-			<< ", " << step << endl;
+			/*<< ", " << step*/ << endl;
 	}
 }

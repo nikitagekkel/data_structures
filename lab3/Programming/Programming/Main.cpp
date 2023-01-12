@@ -167,7 +167,7 @@ int main()
 
 			case 2:
 			{
-				if (IsInitialized(stack, "Stack") == false)
+				if (!IsInitialized(stack, "Stack"))
 				{
 					break;
 				}
@@ -179,7 +179,7 @@ int main()
 
 			case 3:
 			{
-				if (IsInitialized(stack, "Stack") == false)
+				if (!IsInitialized(stack, "Stack"))
 				{
 					break;
 				}
@@ -193,7 +193,7 @@ int main()
 
 			case 4:
 			{
-				if (IsInitialized(stack, "Stack") == false)
+				if (!IsInitialized(stack, "Stack"))
 				{
 					break;
 				}
@@ -213,7 +213,7 @@ int main()
 
 			case 5:
 			{
-				if (IsInitialized(stack, "Stack") == false)
+				if (!IsInitialized(stack, "Stack"))
 				{
 					break;
 				}
@@ -246,7 +246,7 @@ int main()
 
 			case 7:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -257,7 +257,7 @@ int main()
 
 			case 8:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -271,7 +271,7 @@ int main()
 
 			case 9:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -291,7 +291,7 @@ int main()
 
 			case 10:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -302,7 +302,7 @@ int main()
 
 			case 11:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -313,7 +313,7 @@ int main()
 
 			case 12:
 			{
-				if (IsInitialized(buffer, "Buffer") == false)
+				if (!IsInitialized(buffer, "Buffer"))
 				{
 					break;
 				}
@@ -346,7 +346,7 @@ int main()
 
 			case 14:
 			{
-				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				if (!IsInitialized(ringBufferQueue, "Ring buffer queue"))
 				{
 					break;
 				}
@@ -360,7 +360,7 @@ int main()
 
 			case 15:
 			{
-				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				if (!IsInitialized(ringBufferQueue, "Ring buffer queue"))
 				{
 					break;
 				}
@@ -374,7 +374,7 @@ int main()
 
 			case 16:
 			{
-				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				if (!IsInitialized(ringBufferQueue, "Ring buffer queue"))
 				{
 					break;
 				}
@@ -394,7 +394,7 @@ int main()
 
 			case 17:
 			{
-				if (IsInitialized(ringBufferQueue, "Ring buffer queue") == false)
+				if (!IsInitialized(ringBufferQueue, "Ring buffer queue"))
 				{
 					break;
 				}
@@ -427,7 +427,7 @@ int main()
 
 			case 19:
 			{
-				if (IsInitialized(stackQueue, "Stack queue") == false)
+				if (!IsInitialized(stackQueue, "Stack queue"))
 				{
 					break;
 				}
@@ -442,7 +442,7 @@ int main()
 
 			case 20:
 			{
-				if (IsInitialized(stackQueue, "Stack queue") == false)
+				if (!IsInitialized(stackQueue, "Stack queue"))
 				{
 					break;
 				}
@@ -456,7 +456,7 @@ int main()
 
 			case 21:
 			{
-				if (IsInitialized(stackQueue, "Stack queue") == false)
+				if (!IsInitialized(stackQueue, "Stack queue"))
 				{
 					break;
 				}
@@ -474,7 +474,7 @@ int main()
 
 			case 22:
 			{
-				if (IsInitialized(stackQueue, "Stack queue") == false)
+				if (!IsInitialized(stackQueue, "Stack queue"))
 				{
 					break;
 				}

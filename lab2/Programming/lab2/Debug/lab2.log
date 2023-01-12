@@ -1,2 +1,3 @@
-﻿  Main.cpp
+﻿  Test.cpp
+C:\Users\Jett\source\repos\data_structures\lab2\Programming\lab2\Test.cpp(42,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   lab2.vcxproj -> C:\Users\Jett\source\repos\data_structures\lab2\Programming\Debug\lab2.exe
